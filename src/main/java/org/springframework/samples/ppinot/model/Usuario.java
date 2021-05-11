@@ -15,25 +15,18 @@
  */
 package org.springframework.samples.ppinot.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.core.style.ToStringCreator;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -43,9 +36,12 @@ import org.springframework.core.style.ToStringCreator;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-@Entity
-@Table(name = "owners")
-public class Owner extends Person {
+@Getter
+@Setter
+@Document(collection = "owners")
+public class Usuario extends Actor{
+
+
 
 	@Column(name = "address")
 	@NotEmpty
@@ -60,53 +56,29 @@ public class Owner extends Person {
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 
-	//
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-	private User user;
-	//
+//	//
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "username", referencedColumnName = "username")
+//	private User user;
+//	//
+
 	
-	public String getAddress() {
-		return this.address;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public void setAddress(String address) {
+	public Usuario(String address, String city, String telephone,String firstName, String lastName, String userAccountId) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.userAccountId=userAccountId;
 		this.address = address;
-	}
-
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getTelephone() {
-		return this.telephone;
-	}
-
-	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
-	
-
-	@Override
-	public String toString() {
-		return new ToStringCreator(this)
-
-				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
-				.append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
-				.append("telephone", this.telephone).toString();
-	}
+//	@Override
+//	public String toString() {
+//		return new ToStringCreator(this)
+//
+//				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
+//				.append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
+//				.append("telephone", this.telephone).toString();
+//	}
 
 }

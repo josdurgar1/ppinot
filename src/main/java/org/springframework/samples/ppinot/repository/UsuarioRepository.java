@@ -15,15 +15,10 @@
  */
 package org.springframework.samples.ppinot.repository;
 
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.samples.ppinot.model.BaseEntity;
-import org.springframework.samples.ppinot.model.Owner;
+import org.springframework.samples.ppinot.model.Usuario;
 
 /**
  * Spring Data JPA OwnerRepository interface
@@ -31,10 +26,11 @@ import org.springframework.samples.ppinot.model.Owner;
  * @author Michael Isvy
  * @since 15.1.2013
  */
-public interface OwnerRepository extends MongoRepository<Owner, Integer> {
+public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 
-	public Owner findByFirstName(String firstName);
+	public Usuario findByCity(String city);
 
-	public List<Owner> findByLastName(String lastName);
+	public List<Usuario> findByAddress(String address);
+
 
 }

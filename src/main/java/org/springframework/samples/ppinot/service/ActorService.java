@@ -15,15 +15,18 @@
  */
 package org.springframework.samples.ppinot.service;
 
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.ppinot.model.User;
-import org.springframework.samples.ppinot.repository.UserRepository;
+import org.springframework.samples.ppinot.model.Actor;
+import org.springframework.samples.ppinot.repository.ActorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 /**
  * Mostly used as a facade for all Petclinic controllers Also a placeholder
@@ -32,22 +35,41 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Michael Isvy
  */
 @Service
-public class UserService {
+@Transactional
+public class ActorService {
 
-	private UserRepository userRepository;
+	// Managed repository-----------------------------------------------------
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	private ActorRepository actorRepository;
+
+	// Supporting services----------------------------------------------------
+
+	// Constructors-----------------------------------------------------------
+
+	public ActorService() {
+		super();
 	}
 
-	@Transactional
-	public void saveUser(User user) throws DataAccessException {
-		user.setEnabled(true);
-		userRepository.save(user);
+	// Simple CRUD methods----------------------------------------------------
+
+	public Actor findOne(String actorId) {
+		Assert.notNull(actorId);
+
+		Optional<Actor> result;
+
+		result = actorRepository.findById(actorId);
+
+		return result.get();
 	}
-	
-	public Optional<User> findUser(String username) {
-		return userRepository.findById(username);
+
+	public Collection<Actor> findAll() {
+		Collection<Actor> result = new ArrayList<>();
+
+		Iterable<Actor> result1 = actorRepository.findAll();
+		if(result1.iterator().hasNext()) {
+			result.add(result1.iterator().next());
+		}
+		return result;
 	}
 }

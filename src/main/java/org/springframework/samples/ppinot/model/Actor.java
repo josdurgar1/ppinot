@@ -15,40 +15,43 @@
  */
 package org.springframework.samples.ppinot.model;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
 
 /**
  * Simple JavaBean domain object representing an person.
  *
  * @author Ken Krebs
  */
-@MappedSuperclass
-public class Person extends BaseEntity {
+@Data
+@Document(collection = "Actor")
+public class Actor {
 
-	@Column(name = "first_name")
-	@NotEmpty
+	// Constructors -----------------------------------------------------------
+
+	public Actor() {
+		super();
+	}
+
+	// Attributes -------------------------------------------------------------
+
+	@Id
+	private String id;
+
 	protected String firstName;
 
-	@Column(name = "last_name")
-	@NotEmpty
 	protected String lastName;
 
-	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	protected String userAccountId;
+	
+	public Actor(String firstName, String lastName, String userAccountId) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.userAccountId=userAccountId;
 	}
 
 }

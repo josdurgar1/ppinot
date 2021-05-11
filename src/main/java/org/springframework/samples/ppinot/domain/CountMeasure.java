@@ -4,11 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import es.us.isa.ppinot.model.condition.TimeInstantCondition;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Document(collection = "countMeasure")
 public class CountMeasure {
 
@@ -24,4 +22,10 @@ public class CountMeasure {
 	//private String unitOfMeasure;
 	// Momento en que se aplica la medida
 	private TimeInstantCondition when;
+	
+	public CountMeasure(String name, String description, TimeInstantCondition when) {
+		this.name = name;
+		this.description = description;
+		this.when = when;
+	}
 }

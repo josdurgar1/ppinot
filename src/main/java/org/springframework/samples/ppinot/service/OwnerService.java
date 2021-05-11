@@ -20,8 +20,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.ppinot.model.Owner;
-import org.springframework.samples.ppinot.repository.OwnerRepository;
+import org.springframework.samples.ppinot.model.Usuario;
+import org.springframework.samples.ppinot.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,39 +32,36 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Michael Isvy
  */
 @Service
+@Transactional
 public class OwnerService {
 
-	private OwnerRepository ownerRepository;	
+	private UsuarioRepository ownerRepository;	
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private AuthoritiesService authoritiesService;
+		
 
 	@Autowired
-	public OwnerService(OwnerRepository ownerRepository) {
+	public OwnerService(UsuarioRepository ownerRepository) {
 		this.ownerRepository = ownerRepository;
 	}	
 
 	@Transactional(readOnly = true)
-	public Optional<Owner> findOwnerById(int id) throws DataAccessException {
+	public Optional<Usuario> findOwnerById(String id) throws DataAccessException {
 		return ownerRepository.findById(id);
 	}
 
-	@Transactional(readOnly = true)
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
-		return ownerRepository.findByLastName(lastName);
-	}
+//	@Transactional(readOnly = true)
+//	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
+//		return ownerRepository.findByLastName(lastName);
+//	}
 
-	@Transactional
-	public void saveOwner(Owner owner) throws DataAccessException {
-		//creating owner
-		ownerRepository.save(owner);		
-		//creating user
-		userService.saveUser(owner.getUser());
-		//creating authorities
-		authoritiesService.saveAuthorities(owner.getUser().getUsername(), "owner");
-	}		
+//	@Transactional
+//	public void saveOwner(Owner owner) throws DataAccessException {
+//		//creating owner
+//		ownerRepository.save(owner);		
+//		//creating user
+//		userService.saveUser(owner.getUser());
+//		//creating authorities
+//		authoritiesService.saveAuthorities(owner.getUser().getUsername(), "owner");
+//	}		
 
 }
