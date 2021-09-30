@@ -12,6 +12,7 @@ package org.springframework.samples.ppinot.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -61,10 +62,12 @@ public class LoginService implements UserDetailsService {
 	}
 
 	public UserAccount findOne(String id) {
+		Optional<UserAccount>opt;
 		UserAccount res;
 
-		res = userAccoutRepository.findOne(id);
-
+		//res = userAccoutRepository.findOne(id);
+		opt=userAccoutRepository.findById(id);
+		res= opt.get();
 		return res;
 	}
 

@@ -22,7 +22,7 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
 		
 	Optional<UserAccount> findById(String id);
 
-	UserAccount findOne(String usuarioId);
+	//UserAccount findOne(String id);
 	
 
 }

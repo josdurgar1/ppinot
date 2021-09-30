@@ -1,6 +1,7 @@
 package org.springframework.samples.ppinot.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -60,7 +61,12 @@ public class UsuarioService {
 
 		UserAccount result;
 
-		result = userAccountRepository.findOne(usuarioId);
+		Optional<UserAccount>opt;
+		
+
+		//res = userAccountRepository.findOne(id);
+		opt=userAccountRepository.findById(usuarioId);
+		result= opt.get();
 
 		return result;
 

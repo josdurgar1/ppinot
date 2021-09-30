@@ -4,16 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.samples.ppinot.domain.CountMeasure;
 import org.springframework.samples.ppinot.model.Usuario;
 import org.springframework.samples.ppinot.repository.CountMeasureRepository;
 import org.springframework.samples.ppinot.repository.UsuarioRepository;
-import org.springframework.samples.ppinot.repository.ActorRepository;
+import org.springframework.samples.ppinot.security.UserAccountRepository;
 
 import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 
-@EnableMongoRepositories(basePackageClasses = ActorRepository.class)
+//@EnableMongoRepositories(basePackageClasses = UsuarioRepository.class)
+@ComponentScan (basePackages = {"org.springframework.samples.ppinot"})
 @SpringBootApplication()
 public class PpinotApplication implements CommandLineRunner{
 

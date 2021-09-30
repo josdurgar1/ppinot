@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.samples.ppinot.model.Usuario;
+import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data JPA OwnerRepository interface
@@ -26,6 +27,7 @@ import org.springframework.samples.ppinot.model.Usuario;
  * @author Michael Isvy
  * @since 15.1.2013
  */
+@Repository
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 
 	public Usuario findByCity(String city);
