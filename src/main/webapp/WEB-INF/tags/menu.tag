@@ -27,18 +27,32 @@
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
 				</petclinic:menuItem>
-
+				<!--
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Find owners</span>
 				</petclinic:menuItem>
-
+-->
+				<!--
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
 					title="veterinarians">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarians</span>
 				</petclinic:menuItem>
+
+				<petclinic:menuItem active="${name eq 'dashboard'}" url="/dashboard"
+					title="Admin Dashboard">
+					<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+					<span>Dashboard</span>
+				</petclinic:menuItem>
+	-->
+				<petclinic:menuItem active="${name eq 'news'}" url="/news"
+					title="News">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					<span>News</span>
+				</petclinic:menuItem>
+
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
@@ -54,9 +68,11 @@
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="<c:url value="/login" />">Login</a></li>
-					<li><a href="<c:url value="/users/new" />">Register</a></li>
+					<li><a href="<c:url value="/signup" />">Register</a></li>
 				</sec:authorize>
+
 				<sec:authorize access="isAuthenticated()">
+
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span> 
 							<strong><sec:authentication property="name" /></strong> <span
@@ -84,21 +100,27 @@
 								</div>
 							</li>
 							<li class="divider"></li>
-<!-- 							
-                            <li> 
+
+							<li>
 								<div class="navbar-login navbar-login-session">
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
-												<a href="#" class="btn btn-primary btn-block">My Profile</a>
-												<a href="#" class="btn btn-danger btn-block">Change
-													Password</a>
+											
+											<sec:authorize access="hasAuthority('ADMIN')">
+												<a href="<c:url value="/dashboard" />"
+													class="btn btn-primary btn-block">Dashboard</a>
+											</sec:authorize>
+
+											<a href="#" class="btn btn-primary btn-block">My Profile</a>
+											<a href="#" class="btn btn-danger btn-block">Change
+												Password</a>
 											</p>
 										</div>
 									</div>
 								</div>
 							</li>
--->
+
 						</ul></li>
 				</sec:authorize>
 			</ul>
