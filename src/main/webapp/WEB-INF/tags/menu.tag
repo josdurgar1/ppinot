@@ -60,7 +60,16 @@
 					<span>Error</span>
 				</petclinic:menuItem>
 
+
+				<sec:authorize access="isAuthenticated()">
+					<petclinic:menuItem active="${name eq 'error'}" url="/archives/myArchives"
+						title="My Archives">
+						<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+						<span>My Archives</span>
+					</petclinic:menuItem>
+				</sec:authorize>
 			</ul>
+
 
 
 
@@ -106,15 +115,15 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
-											
-											<sec:authorize access="hasAuthority('ADMIN')">
-												<a href="<c:url value="/dashboard" />"
-													class="btn btn-primary btn-block">Dashboard</a>
-											</sec:authorize>
 
-											<a href="#" class="btn btn-primary btn-block">My Profile</a>
-											<a href="#" class="btn btn-danger btn-block">Change
-												Password</a>
+												<sec:authorize access="hasAuthority('ADMIN')">
+													<a href="<c:url value="/dashboard" />"
+														class="btn btn-primary btn-block">Dashboard</a>
+												</sec:authorize>
+
+												<a href="#" class="btn btn-primary btn-block">My Profile</a>
+												<a href="#" class="btn btn-danger btn-block">Change
+													Password</a>
 											</p>
 										</div>
 									</div>

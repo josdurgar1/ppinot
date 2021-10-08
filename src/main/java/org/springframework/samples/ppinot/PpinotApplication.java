@@ -87,7 +87,26 @@ public class PpinotApplication implements CommandLineRunner {
 				Role newUserRole = new Role();
 				newUserRole.setRole("USER");
 				roleRepository.save(newUserRole);
+				
+				
 			}
+			System.out.println("Adding sample USER-> user:admin");
+			User u2 = new User();
+			u2.setAddress("C/Administrador");
+			u2.setCity("La Parra");
+			u2.setEmail("admin@ppinot.es");
+			u2.setFirstName("Jose");
+			u2.setLastName("Duran");
+			u2.setPassword("$2a$10$2qtGZvl6uMWjvGyOUZZJRejC49d25Rmi8vBKe.lnA4Qn4FWbMCIA.");
+			u2.setTelephone("666777888");
+			u2.setUsername("user");
+			u2.setEnabled(true);
+			Role admin3Role = roleRepository.findByRole("USER");
+			Set<Role> role2 = new HashSet<Role>();
+			role2.add(admin3Role);
+			u2.setRoles(role2);
+			userRepository.save(u2);
+			System.out.println("Finished...");
 		};
 		
 
