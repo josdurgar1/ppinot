@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,7 @@ import org.springframework.samples.ppinot.repository.UserRepository;
 import org.springframework.samples.ppinot.service.UserService;
 
 //@EnableMongoRepositories(basePackageClasses = UsuarioRepository.class)
+//@EnableAutoConfiguration
 @ComponentScan(basePackages = { "org.springframework.samples.ppinot" })
 @SpringBootApplication()
 public class PpinotApplication implements CommandLineRunner {

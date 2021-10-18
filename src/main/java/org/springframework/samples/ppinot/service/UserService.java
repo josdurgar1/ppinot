@@ -10,13 +10,17 @@ import org.springframework.samples.ppinot.model.Role;
 import org.springframework.samples.ppinot.model.User;
 import org.springframework.samples.ppinot.repository.RoleRepository;
 import org.springframework.samples.ppinot.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class UserService implements UserDetailsService  {
@@ -39,6 +43,7 @@ public class UserService implements UserDetailsService  {
 	public User findUserByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
+	
 	
 	public void saveUser(User user) {
 	    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -93,5 +98,33 @@ public class UserService implements UserDetailsService  {
 		u.setUsername("admin");
 		userRepository.save(u);
 		
+	}
+	
+	public User getPrincipal() {
+		User result;
+		SecurityContext context;
+		Authentication authentication;
+		org.springframework.security.core.userdetails.User principal2;
+		Object principal;
+
+		// If the asserts in this method fail, then you're
+		// likely to have your Tomcat's working directory
+		// corrupt. Please, clear your browser's cache, stop
+		// Tomcat, update your Maven's project configuration,
+		// clean your project, clean Tomcat's working directory,
+		// republish your project, and start it over.
+
+		context = SecurityContextHolder.getContext();
+		Assert.notNull(context);
+		authentication = context.getAuthentication();
+		Assert.notNull(authentication);
+		principal = authentication.getPrincipal();
+		Assert.isTrue(principal instanceof org.springframework.security.core.userdetails.User);
+		Assert.notNull(principal);
+		principal2=(org.springframework.security.core.userdetails.User) principal;
+		result = findUserByUsername(principal2.getUsername());
+		Assert.isTrue(result.getId() != null);
+
+		return result;
 	}
 }

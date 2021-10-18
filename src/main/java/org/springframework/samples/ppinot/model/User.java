@@ -51,7 +51,7 @@ public class User{
 	@Id
 	private String id;
 
-	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+//	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	
 	@NotEmpty
 	@Size(min = 4, max = 32)
