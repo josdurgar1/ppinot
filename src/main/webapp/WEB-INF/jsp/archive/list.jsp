@@ -9,19 +9,24 @@
 <petclinic:layout pageName="archiveList">
 	<h2>My Archives</h2>
 
+	<c:out value="${fileDownloadUri }"></c:out>
+
     <table id="archivesTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Title</th>
-            <th style="width: 200px;">File Title</th>
+        	<th style="width: 200px;">File</th>
+            <th style="width: 200px;">Title</th>
+            <th style="width: 200px;">Upload Date</th>
+            <th style="width: 200px;">Assigned Metrics</th>
+            <th style="width: 200px;">Add New Metric</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${myArchives}" var="archive">
             <tr>
                 <td>
-                    <spring:url value="/owners/{ownerId}" var="ownerUrl">
-                        <spring:param name="ownerId" value="${archives.id}"/>
+                    <spring:url value="details?archiveId={archiveId}" var="ownerUrl">
+                        <spring:param name="archiveId" value="${archive.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(ownerUrl)}"><c:out value="${archive.title}"/></a>
                 </td>
@@ -29,7 +34,16 @@
                     <c:out value="${archive.title}"/>
                 </td>
                 <td>
-                    <c:out value="${archive.file.path}"/>
+               <fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${archive.uploadDate}" />
+                </td>
+                  <td>
+                    <c:out value="${archive.assignedMetrics}"/>
+                </td>
+                 <td>
+                   <spring:url value="assignMetric?archiveId={archiveId}" var="ownerUrl">
+                        <spring:param name="archiveId" value="${archive.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(ownerUrl)}"><c:out value="${archive.title}"/></a>
                 </td>
          </tr>
         </c:forEach>

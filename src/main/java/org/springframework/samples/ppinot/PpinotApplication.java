@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.ppinot.model.Role;
 import org.springframework.samples.ppinot.model.User;
+import org.springframework.samples.ppinot.repository.ArchiveRepository;
 import org.springframework.samples.ppinot.repository.CountMeasureRepository;
 import org.springframework.samples.ppinot.repository.RoleRepository;
 import org.springframework.samples.ppinot.repository.UserRepository;
@@ -30,6 +31,8 @@ public class PpinotApplication implements CommandLineRunner {
 	CountMeasureRepository countMeasureRepository;
 	@Autowired
 	RoleRepository role2Repository;
+	@Autowired
+	ArchiveRepository archiveRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PpinotApplication.class, args);
@@ -44,6 +47,8 @@ public class PpinotApplication implements CommandLineRunner {
 	public void deleteAll() {
 		System.out.println("Deleting all records..");
 		userRepository.deleteAll();
+		archiveRepository.deleteAll();
+		countMeasureRepository.deleteAll();
 	}
 
 //	public void addSampleData() {

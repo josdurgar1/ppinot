@@ -8,9 +8,11 @@
 
 <petclinic:layout pageName="newArchive">
 
- <form:form modelAttribute="archive" class="form-horizontal" id="add-archive-form">
+ <form:form modelAttribute="archive" class="form-horizontal" id="add-archive-form" enctype="multipart/form-data">
         <div class="form-group has-feedback">
            <form:hidden path = "userId" />
+           <form:hidden path = "assignedMetrics" />
+           <form:hidden path = "uploadDate" />
             <petclinic:inputField label="Title" name="title"/>
          	<label>File: </label> <input type="file" name="file" size="50" />
         </div>

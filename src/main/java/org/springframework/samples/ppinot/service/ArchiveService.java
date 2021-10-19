@@ -1,9 +1,10 @@
 package org.springframework.samples.ppinot.service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -22,8 +23,8 @@ public class ArchiveService {
 	@Autowired
 	private UserService userService;
 
-	public List<Archive> myArchives(User user) {
-		List<Archive> myArchives;
+	public Set<Archive> myArchives(User user) {
+		Set<Archive> myArchives;
 		myArchives = archiveRepository.findByUserId(user.getId());
 		return myArchives;
 	}
@@ -32,7 +33,10 @@ public class ArchiveService {
 		Archive result;
 		result=new Archive();
 		User user = userService.getPrincipal();
+//		Date date = new Date();
+//		result.setUploadDate(date);
 		result.setUserId(user.getId());
+		result.setAssignedMetrics(0);
 		return result;
 	}
 
@@ -40,19 +44,34 @@ public class ArchiveService {
 		//assert.assertNotNull(archive);
 //		Calendar calendar = Calendar.getInstance();
 //		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-		Date date =  new Date();
+//		LocalDateTime date =  LocalDateTime.now();
+		Date date = new Date();
 //		formatter.format(date);
         archive.setUploadDate(date);
 		archiveRepository.save(archive);
 		
 	}
 
-	public List<Archive> myArchives() {
+	public Set<Archive> myArchives() {
 		User user=userService.getPrincipal();
-		List<Archive> myArchives;
+		Set<Archive> myArchives;
 		String userId=user.getId();
 		myArchives = archiveRepository.findByUserId(userId);
 		return myArchives;
+	}
+
+	public Archive archiveDetails(String archiveId) {
+		Archive result;
+		Optional<Archive> archive= archiveRepository.findById(archiveId);
+		result=archive.get();
+		return result;
+	}
+
+	public Archive findByName(String title) {
+		Archive result;
+		Optional<Archive> archive=archiveRepository.findByTitle(title);
+		result= archive.get();
+		return result;
 	}
 
 }
