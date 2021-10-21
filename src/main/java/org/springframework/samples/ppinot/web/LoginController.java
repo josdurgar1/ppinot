@@ -84,7 +84,6 @@ public class LoginController {
 	public ModelAndView editUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		Optional<User> userExists = userService.findUserByUsername(user.getUsername());
-		User user1;
 
 		User principal = userService.getPrincipal();
 		user.setPassword(principal.getPassword());
