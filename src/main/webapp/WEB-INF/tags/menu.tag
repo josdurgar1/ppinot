@@ -53,26 +53,26 @@
 					<span>News</span>
 				</petclinic:menuItem>
 
-
+<!--
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
 
-
+-->
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'My Archives'}" url="/archives/myArchives"
+					<petclinic:menuItem active="${name eq 'myArchives'}" url="/archives/myArchives"
 						title="My Archives">
-						<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>My Archives</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'New Archive'}" url="/archives/newArchive"
+					<petclinic:menuItem active="${name eq 'newArchive'}" url="/archives/newArchive"
 						title="New Archive">
-						<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 						<span>New Archive</span>
 					</petclinic:menuItem>
 				</sec:authorize>
@@ -129,7 +129,7 @@
 														class="btn btn-primary btn-block">Dashboard</a>
 												</sec:authorize>
 
-												<a href="#" class="btn btn-primary btn-block">My Profile</a>
+												<a href="<c:url value="/myProfile" />" class="btn btn-primary btn-block">My Profile</a>
 												<a href="#" class="btn btn-danger btn-block">Change
 													Password</a>
 											</p>

@@ -1,5 +1,7 @@
 package org.springframework.samples.ppinot.web;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class LoginController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		User userExists = userService.findUserByUsername(user.getUsername());
+		User userExists = userService.findUserByUsername(user.getUsername()).get();
 		if (userExists != null) {
 			bindingResult.rejectValue("username", "error.user",
 					"There is already a user registered with the username provided");
@@ -52,6 +54,7 @@ public class LoginController {
 			modelAndView.setViewName("login");
 
 		}
+
 		return modelAndView;
 	}
 
@@ -59,11 +62,45 @@ public class LoginController {
 	public ModelAndView dashboard() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		User user = userService.findUserByUsername(auth.getName()).get();
 		modelAndView.addObject("currentUser", user);
 		modelAndView.addObject("firsName", "Welcome " + user.getFirstName());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("/admin/dashboard");
 		return modelAndView;
 	}
+
+	@RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+	public ModelAndView myProfile() {
+		User user = userService.getPrincipal();
+		ModelAndView modelAndView = new ModelAndView();
+		user.setPassword("pass");
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("signup");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/myProfile", method = RequestMethod.POST)
+	public ModelAndView editUser(@Valid User user, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		Optional<User> userExists = userService.findUserByUsername(user.getUsername());
+		User user1;
+
+		User principal = userService.getPrincipal();
+		user.setPassword(principal.getPassword());
+		user.setId(principal.getId());
+		
+		if (!principal.getUsername().equals(user.getUsername()) && userExists != null) {
+			bindingResult.rejectValue("username", "error.user",
+					"There is already a user registered with the username provided");
+		}
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("signup");
+		} 
+			userService.editUser(user);
+			modelAndView.addObject("successMessage", "User has been updated successfully");
+			modelAndView.setViewName("signup");
+		return modelAndView;
+	}
+
 }

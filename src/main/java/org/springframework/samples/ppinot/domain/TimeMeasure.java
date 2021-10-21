@@ -7,36 +7,49 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import es.us.isa.ppinot.model.condition.TimeMeasureType;
 import es.us.isa.ppinot.model.state.RuntimeState;
 import lombok.Data;
 
 @Data
 @Document
-public class CountMeasure implements Serializable {
-
-	protected static final long serialVersionUID = 1L;
-
-	public CountMeasure() {
+public class TimeMeasure implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public TimeMeasure() {
 		super();
 	}
-
 	@Id
 	private String id;
-	// Nombre de la medida
+	
 	@NotBlank
 	private String name;
-	// Descripcion de la medida
+	
 	@NotBlank
 	private String description;
-	// Escala de la medida
+	
 	@NotBlank
-	private String scale;
-	// Unidad de medida del indicador
+	private String Scale;
+	
 	@NotBlank
 	private String unitOfMeasure;
-
-	private String appliesTo;
-
-	private RuntimeState state;
+	
+	@NotBlank
+	private String fromAppliesTo;
+	
+	private RuntimeState fromChangesToState;
+	
+	@NotBlank
+	private String toAppliesTo;
+	
+	private RuntimeState toChangesToState;
+	
+	private TimeMeasureType timeMeasureType;
+	
+	private String singleInstanceAggFunction;
 
 }

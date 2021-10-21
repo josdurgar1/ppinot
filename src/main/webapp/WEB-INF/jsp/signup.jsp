@@ -10,6 +10,7 @@
     <h2>
         <c:if test="${user['new']}">New </c:if> User
     </h2>
+    <h3><c:out value="${successMessage }"></c:out></h3>
     <form:form modelAttribute="user" class="form-horizontal" id="add-user-form">
         <div class="form-group has-feedback">
             <petclinic:inputField label="First Name" name="firstName"/>
@@ -19,7 +20,14 @@
             <petclinic:inputField label="City" name="city"/>
             <petclinic:inputField label="Telephone" name="telephone"/>
             <petclinic:inputField label="Username" name="username"/>
-            <petclinic:inputField label="Password" name="password"/>
+           <c:choose>
+                    <c:when test="${user['new']}">
+            <petclinic:inputField type="password" label="Password" name="password"/>
+            </c:when>
+             <c:otherwise>
+             <form:hidden path="password"/>
+             </c:otherwise>
+            </c:choose>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

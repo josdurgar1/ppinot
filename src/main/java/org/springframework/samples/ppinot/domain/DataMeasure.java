@@ -12,30 +12,39 @@ import lombok.Data;
 
 @Data
 @Document
-public class CountMeasure implements Serializable {
+public class DataMeasure implements Serializable{
 
-	protected static final long serialVersionUID = 1L;
-
-	public CountMeasure() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public DataMeasure() {
 		super();
 	}
-
 	@Id
 	private String id;
-	// Nombre de la medida
+	
 	@NotBlank
 	private String name;
-	// Descripcion de la medida
+	
 	@NotBlank
 	private String description;
-	// Escala de la medida
+	
 	@NotBlank
-	private String scale;
-	// Unidad de medida del indicador
+	private String Scale;
+	
 	@NotBlank
 	private String unitOfMeasure;
-
+	
+	@NotBlank
+	private String selection;
+	
+	private String dataobjectid;
+	
 	private String appliesTo;
+
+	private String restriction;
 
 	private RuntimeState state;
 

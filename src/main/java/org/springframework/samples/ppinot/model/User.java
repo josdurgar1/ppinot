@@ -16,12 +16,8 @@
 package org.springframework.samples.ppinot.model;
 
 import java.util.Set;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -29,6 +25,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 

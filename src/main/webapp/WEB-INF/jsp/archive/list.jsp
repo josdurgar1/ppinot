@@ -6,19 +6,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 
-<petclinic:layout pageName="archiveList">
+<petclinic:layout pageName="myArchives">
 	<h2>My Archives</h2>
-
-	<c:out value="${fileDownloadUri }"></c:out>
 
     <table id="archivesTable" class="table table-striped">
         <thead>
         <tr>
-        	<th style="width: 200px;">File</th>
+        	<th style="width: 200px;">Details</th>
             <th style="width: 200px;">Title</th>
             <th style="width: 200px;">Upload Date</th>
             <th style="width: 200px;">Assigned Metrics</th>
             <th style="width: 200px;">Add New Metric</th>
+            <th style="width: 200px;">Delete Archive</th>
         </tr>
         </thead>
         <tbody>
@@ -40,10 +39,16 @@
                     <c:out value="${archive.assignedMetrics}"/>
                 </td>
                  <td>
-                   <spring:url value="assignMetric?archiveId={archiveId}" var="ownerUrl">
+                   <spring:url value="/metrics/new?archiveId={archiveId}" var="assignUrl">
                         <spring:param name="archiveId" value="${archive.id}"/>
                     </spring:url>
-                    <a href="${fn:escapeXml(ownerUrl)}"><c:out value="${archive.title}"/></a>
+                    <a href="${fn:escapeXml(assignUrl)}"><c:out value="${archive.title}"/></a>
+                </td>
+                 <td>
+                <spring:url value="delete?archiveId={archiveId}" var="deleteUrl">
+                        <spring:param name="archiveId" value="${archive.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(deleteUrl)}"><c:out value="Delete"/></a>
                 </td>
          </tr>
         </c:forEach>

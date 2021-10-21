@@ -74,4 +74,11 @@ public class ArchiveService {
 		return result;
 	}
 
+	public Archive findById(String archiveId) {
+		Archive result;
+		Optional<Archive> archive=archiveRepository.findById(archiveId);
+		result= archive.get();
+		return result;
+	}
+
 }

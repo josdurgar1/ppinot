@@ -2,6 +2,7 @@
 package org.springframework.samples.ppinot.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.samples.ppinot.model.User;
@@ -14,7 +15,8 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 	public User findByEmail(String email);
 
-	public User findByUsername(String username);
+	public Optional<User> findByUsername(String username);
+
 
 
 }

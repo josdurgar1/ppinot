@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.ppinot.model.Role;
@@ -40,10 +41,13 @@ public class UserService implements UserDetailsService  {
 	    return userRepository.findByEmail(email);
 	}
 	
-	public User findUserByUsername(String username) {
-		return userRepository.findByUsername(username);
+	public Optional<User> findUserByUsername(String username) {
+		Optional<User>result= userRepository.findByUsername(username);
+		
+		return result;
 	}
 	
+
 	
 	public void saveUser(User user) {
 	    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -52,6 +56,16 @@ public class UserService implements UserDetailsService  {
 	    user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 	    userRepository.save(user);
 	}
+	
+	public void editUser(User user) {
+//	    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//	    user.setEnabled(true);
+//	    Role userRole = roleRepository.findByRole("USER");
+//	    user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+	    userRepository.save(user);
+	}
+	
+	
 	
 	public void saveAdmin(User user) {
 		 user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -63,10 +77,10 @@ public class UserService implements UserDetailsService  {
 	
 	public UserDetails  loadUserByUsername(String username) throws UsernameNotFoundException {
 
-	    User user = userRepository.findByUsername(username);
-	    if(user != null) {
-	        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
-	        return buildUserForAuthentication(user, authorities);
+	    Optional<User> user = userRepository.findByUsername(username);
+	    if(user.isPresent()) {
+	        List<GrantedAuthority> authorities = getUserAuthority(user.get().getRoles());
+	        return buildUserForAuthentication(user.get(), authorities);
 	    } else {
 	        throw new UsernameNotFoundException("username not found");
 	    }
@@ -122,7 +136,7 @@ public class UserService implements UserDetailsService  {
 		Assert.isTrue(principal instanceof org.springframework.security.core.userdetails.User);
 		Assert.notNull(principal);
 		principal2=(org.springframework.security.core.userdetails.User) principal;
-		result = findUserByUsername(principal2.getUsername());
+		result = findUserByUsername(principal2.getUsername()).get();
 		Assert.isTrue(result.getId() != null);
 
 		return result;
