@@ -6,9 +6,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 
-<petclinic:layout pageName="Archive Details">
-	<h2><c:out value="${archive.title }"></c:out> Details</h2>
+<petclinic:layout pageName="Log Details">
+	<h2><c:out value="${log.title }"></c:out> Details</h2>
 	
-	<a href='<c:out value="${archive.downloadUri }"></c:out>'>Download Archive</a>
+	<a href='<c:out value="${log.downloadUri }"></c:out>'>Download Log</a>
 	
 	</petclinic:layout>

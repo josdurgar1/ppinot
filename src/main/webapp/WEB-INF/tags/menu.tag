@@ -62,18 +62,18 @@
 
 -->
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'myArchives'}" url="/archives/myArchives"
-						title="My Archives">
+					<petclinic:menuItem active="${name eq 'myLogs'}" url="/logs/myLogs"
+						title="My Logs">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-						<span>My Archives</span>
+						<span>My Logs</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'newArchive'}" url="/archives/newArchive"
-						title="New Archive">
+					<petclinic:menuItem active="${name eq 'newLog'}" url="/logs/newLog"
+						title="New Log">
 						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-						<span>New Archive</span>
+						<span>New Log</span>
 					</petclinic:menuItem>
 				</sec:authorize>
 			</ul>

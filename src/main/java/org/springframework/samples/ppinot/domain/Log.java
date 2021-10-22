@@ -19,15 +19,15 @@ import lombok.Data;
 
 @Data
 @Document
-public class Archive implements Serializable{
+public class Log implements Serializable{
 
 	protected static final long	serialVersionUID	= 1L;
 	
-	public Archive() {
+	public Log() {
 		super();
 	}
 	
-	public Archive(String id, String title, byte[] file, Date uploadDate,int assignedMetrics, String userId) {
+	public Log(String id, String title, byte[] file, Date uploadDate,int assignedMetrics, String userId) {
 		this.id=id;
 		this.title=title;
 		this.file=file;

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.ppinot.model.Role;
 import org.springframework.samples.ppinot.model.User;
-import org.springframework.samples.ppinot.repository.ArchiveRepository;
+import org.springframework.samples.ppinot.repository.LogRepository;
 import org.springframework.samples.ppinot.repository.CountMeasureRepository;
 import org.springframework.samples.ppinot.repository.RoleRepository;
 import org.springframework.samples.ppinot.repository.UserRepository;
@@ -32,7 +32,7 @@ public class PpinotApplication implements CommandLineRunner {
 	@Autowired
 	RoleRepository role2Repository;
 	@Autowired
-	ArchiveRepository archiveRepository;
+	LogRepository archiveRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PpinotApplication.class, args);

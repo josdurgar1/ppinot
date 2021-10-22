@@ -6,10 +6,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 
-<petclinic:layout pageName="newArchive">
+<petclinic:layout pageName="newLog">
 
-	<form:form modelAttribute="archive" class="form-horizontal"
-		id="add-archive-form" enctype="multipart/form-data">
+	<form:form modelAttribute="log" class="form-horizontal"
+		id="add-log-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
 			<form:hidden path="userId" />
 			<form:hidden path="assignedMetrics" />
@@ -35,7 +35,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-default" type="submit">Add Archive</button>
+				<button class="btn btn-default" type="submit">Add Log</button>
 			</div>
 		</div>
 	</form:form>

@@ -31,6 +31,7 @@
 <petclinic:footer/>
 <jsp:invoke fragment="customScript" />
 
+
 </body>
 
 </html>

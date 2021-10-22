@@ -11,7 +11,7 @@
 
 <h2>New Measure</h2>
 
-    <table id="archivesTable" class="table table-striped">
+    <table id="logsTable" class="table table-striped">
         <thead>
         <tr>
         	<th style="width: 200px;">Details</th>
@@ -21,24 +21,24 @@
         <tbody>
            <tr>
                 <td>
-                    <spring:url value="newCountMeasure?archiveId={archiveId}" var="newCountMeasureUrl">
-                        <spring:param name="archiveId" value="${archiveId}"/>
+                    <spring:url value="newCountMeasure?logId={logId}" var="newCountMeasureUrl">
+                        <spring:param name="logId" value="${logId}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(newCountMeasureUrl)}">CountMeasure</a>
                 </td>
          </tr>
           <tr>
                <td>
-                    <spring:url value="newTimeMeasure?archiveId={archiveId}" var="newTimeMeasureUrl">
-                        <spring:param name="archiveId" value="${archiveId}"/>
+                    <spring:url value="newTimeMeasure?logId={logId}" var="newTimeMeasureUrl">
+                        <spring:param name="logId" value="${logId}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(newTimeMeasureUrl)}">TimeMeasure</a>
                 </td>
          </tr>
          <tr>
                <td>
-                    <spring:url value="newDataMeasure?archiveId={archiveId}" var="newDataMeasureUrl">
-                        <spring:param name="archiveId" value="${archiveId}"/>
+                    <spring:url value="newDataMeasure?logId={logId}" var="newDataMeasureUrl">
+                        <spring:param name="logId" value="${logId}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(newDataMeasureUrl)}">DataMeasure</a>
                 </td>

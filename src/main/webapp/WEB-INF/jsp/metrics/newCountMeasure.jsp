@@ -45,7 +45,7 @@
 		<petclinic:inputField required="required" label="Applies To" name="appliesTo"></petclinic:inputField>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-default" type="submit">Add Archive</button>
+				<button class="btn btn-default" type="submit">Add Measure</button>
 			</div>
 		</div>
 		

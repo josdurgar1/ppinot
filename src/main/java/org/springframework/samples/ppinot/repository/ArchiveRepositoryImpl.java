@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.samples.ppinot.domain.Archive;
+import org.springframework.samples.ppinot.domain.Log;
 
 public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom{
 
@@ -16,7 +16,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom{
 	  }
 	
 	@Override
-	public Set<Archive> query(DynamicQuery dynamicQuery) {
+	public Set<Log> query(DynamicQuery dynamicQuery) {
 		// TODO Auto-generated method stub
 		return null;
 	}

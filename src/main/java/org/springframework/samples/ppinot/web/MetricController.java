@@ -1,11 +1,11 @@
 package org.springframework.samples.ppinot.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.ppinot.domain.Archive;
+import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.CountMeasure;
 import org.springframework.samples.ppinot.domain.Scale;
 import org.springframework.samples.ppinot.domain.UnitOfMeasure;
-import org.springframework.samples.ppinot.service.ArchiveService;
+import org.springframework.samples.ppinot.service.LogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,23 +17,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class MetricController {
 	
 	@Autowired
-	private ArchiveService archiveService;
+	private LogService logService;
 
 	
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public ModelAndView new_(@RequestParam String archiveId) {
+	public ModelAndView new_(@RequestParam String logId) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("archiveId",archiveId);
+		modelAndView.addObject("logId",logId);
 		modelAndView.setViewName("/metrics/new");
 		return modelAndView;
 	  }
 	
 	@RequestMapping(value = "/newCountMeasure", method = RequestMethod.GET)
-	public ModelAndView newCountMeasure(@RequestParam String archiveId) {
-		Archive archive = archiveService.findById(archiveId);
+	public ModelAndView newCountMeasure(@RequestParam String logId) {
+		Log log = logService.findById(logId);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("archive",archive);
+		modelAndView.addObject("log",log);
 		CountMeasure countMeasure=new CountMeasure();
 		modelAndView.addObject("countMeasure",countMeasure);
 		modelAndView.addObject("scale_",Scale.values());
