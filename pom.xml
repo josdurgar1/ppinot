@@ -5,19 +5,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.samples</groupId>
 	<artifactId>ppinot-application</artifactId>
-	<version>2.2</version>
-	<packaging>war</packaging>
-
-	<!-- <parent> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-parent</artifactId> 
-		<version>2.2.4.RELEASE</version> </parent> -->
-	<name>ppinot</name>
+	<version>2.2.0.BUILD-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
-		<relativePath />
 	</parent>
+	<name>ppinot</name>
+
 	<properties>
 
 		<!-- Generic properties -->
@@ -33,8 +29,7 @@
 
 		<jacoco.version>0.8.5</jacoco.version>
 		<spring-format.version>0.0.19</spring-format.version>
-		<sourceDirectory>${basedir}/src</sourceDirectory>
-		<targetDirectory>${basedir}/target</targetDirectory>
+
 	</properties>
 
 	<dependencies>
@@ -46,26 +41,26 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 
 		</dependency>
-
+		
 		<!-- Development tools -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-
+		
 		<!-- Libreria tools -->
-		<dependency>
+        <dependency>
 			<groupId>es.us.isa.ppinot</groupId>
 			<artifactId>ppinot-model</artifactId>
 			<version>2.1</version>
 		</dependency>
-
+		
 		<!-- Spring and Spring Boot dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
