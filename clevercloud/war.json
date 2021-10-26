@@ -9,7 +9,7 @@
          {
             "file": "target/ppinot-application-2.2.0.BUILD-SNAPSHOT.war",
 			"context": "/",
-            "port": 443
+            "port": 8080
          }
       ]
    }
