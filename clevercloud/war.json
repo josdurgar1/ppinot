@@ -1,0 +1,14 @@
+{
+   "build": {
+      "type": "maven",
+      "goal": "package"
+   },
+   "deploy": {
+      "container": "TOMCAT8",
+      "war": [
+         {
+            "file": "target/ppinot-application-2.2.0.BUILD-SNAPSHOT.war"
+         }
+      ]
+   }
+}
