@@ -8,7 +8,7 @@
       "war": [
          {
             "file": "target/ppinot-application-2.2.0.BUILD-SNAPSHOT.war",
-			"context": "/",
+			"context": "/ppinot",
             "port": 8080
          }
       ]
