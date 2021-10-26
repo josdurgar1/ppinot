@@ -1,7 +1,7 @@
 {
     "build": {
         "type": "maven",
-        "goal": "-Pprod package -DskipTests build"
+        "goal": "build"
     },
     "deploy": {
     "jarName": "./target/ppinot-application-0.0.1-SNAPSHOT.jar"
