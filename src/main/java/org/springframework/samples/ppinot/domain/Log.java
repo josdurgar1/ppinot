@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,6 +16,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import es.us.isa.ppinot.model.MeasureDefinition;
 import lombok.Data;
 
 @Data
@@ -50,9 +52,8 @@ public class Log implements Serializable{
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date uploadDate;
 	
-	@NotNull
-	@Min(0)
-	private int assignedMetrics;
+	@NotNull	
+	private List<MeasureDefinition> assignedMetrics;
 	
 	@NotNull
 	private String userId;
