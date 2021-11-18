@@ -3,7 +3,9 @@ package org.springframework.samples.ppinot.service;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,6 +16,11 @@ import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.model.User;
 import org.springframework.samples.ppinot.repository.LogRepository;
 import org.springframework.stereotype.Service;
+
+import es.us.isa.ppinot.evaluation.Evaluation;
+import es.us.isa.ppinot.evaluation.computers.TimeMeasureComputer;
+import es.us.isa.ppinot.model.MeasureDefinition;
+import es.us.isa.ppinot.model.base.TimeMeasure;
 
 @Service
 public class LogService {
@@ -33,10 +40,12 @@ public class LogService {
 		Log result;
 		result=new Log();
 		User user = userService.getPrincipal();
+		List<String> assignedMetrics=new ArrayList<String>();
+		result.setAssignedMetrics(assignedMetrics);
 //		Date date = new Date();
 //		result.setUploadDate(date);
 		result.setUserId(user.getId());
-		result.setAssignedMetrics(0);
+//		result.setAssignedMetrics(0);
 		return result;
 	}
 
@@ -83,8 +92,11 @@ public class LogService {
 
 	public void delete(Log log) {
 		
-		//FALTA BORRAR TODAS las medidas asociadas al log
 		logRepository.delete(log);
+		
+	}
+
+	public void addTimeMeasure(String logId, @Valid TimeMeasure timeMeasure) {
 		
 	}
 

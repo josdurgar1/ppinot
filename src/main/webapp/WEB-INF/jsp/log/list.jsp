@@ -35,7 +35,7 @@
 					<td><c:out value="${log.title}" /></td>
 					<td><fmt:formatDate type="both" dateStyle="short"
 							timeStyle="short" value="${log.uploadDate}" /></td>
-					<td><c:out value="${log.assignedMetrics}" /></td>
+					<td><c:out value="${log.assignedMetrics.size()}" /></td>
 					<td><spring:url value="/metrics/new?logId={logId}"
 							var="assignUrl">
 							<spring:param name="logId" value="${log.id}" />

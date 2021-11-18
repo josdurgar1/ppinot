@@ -1,23 +1,19 @@
 package org.springframework.samples.ppinot;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.ppinot.model.Role;
 import org.springframework.samples.ppinot.model.User;
 import org.springframework.samples.ppinot.repository.LogRepository;
-import org.springframework.samples.ppinot.repository.CountMeasureRepository;
 import org.springframework.samples.ppinot.repository.RoleRepository;
 import org.springframework.samples.ppinot.repository.UserRepository;
-import org.springframework.samples.ppinot.service.UserService;
 
 //@EnableMongoRepositories(basePackageClasses = UsuarioRepository.class)
 //@EnableAutoConfiguration
@@ -27,8 +23,6 @@ public class PpinotApplication implements CommandLineRunner {
 
 	@Autowired
 	UserRepository userRepository;
-	@Autowired
-	CountMeasureRepository countMeasureRepository;
 	@Autowired
 	RoleRepository role2Repository;
 	@Autowired
@@ -48,7 +42,6 @@ public class PpinotApplication implements CommandLineRunner {
 		System.out.println("Deleting all records..");
 		userRepository.deleteAll();
 		archiveRepository.deleteAll();
-		countMeasureRepository.deleteAll();
 	}
 
 //	public void addSampleData() {

@@ -1,14 +1,9 @@
 package org.springframework.samples.ppinot.domain;
 
-import java.io.File;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,7 +24,7 @@ public class Log implements Serializable{
 		super();
 	}
 	
-	public Log(String id, String title, byte[] file, Date uploadDate,int assignedMetrics, String userId) {
+	public Log(String id, String title, byte[] file, Date uploadDate,List<String> assignedMetrics, String userId) {
 		this.id=id;
 		this.title=title;
 		this.file=file;
@@ -41,7 +36,7 @@ public class Log implements Serializable{
 	@Id
 	private String id;
 	
-	@NotNull
+	@NotBlank
 	private String title;
 	
 	@NotNull
@@ -51,9 +46,8 @@ public class Log implements Serializable{
 //	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date uploadDate;
-	
-	@NotNull	
-	private List<MeasureDefinition> assignedMetrics;
+		
+	private List<String> assignedMetrics;
 	
 	@NotNull
 	private String userId;

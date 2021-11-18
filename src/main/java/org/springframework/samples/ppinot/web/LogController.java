@@ -69,6 +69,8 @@ public class LogController {
 				log.setFile(file.getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
+			}catch(IllegalStateException f) {
+				modelAndView.addObject("messasge", f.getMessage());
 			}
 
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/logs/download/")
