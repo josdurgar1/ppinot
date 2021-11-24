@@ -20,7 +20,6 @@
 				<th style="width: 200px;">Details</th>
 				<th style="width: 200px;">Title</th>
 				<th style="width: 200px;">Upload Date</th>
-				<th style="width: 200px;">Assigned Metrics</th>
 				<th style="width: 200px;">Add New Metric</th>
 				<th style="width: 200px;">Delete Log</th>
 			</tr>
@@ -35,7 +34,6 @@
 					<td><c:out value="${log.title}" /></td>
 					<td><fmt:formatDate type="both" dateStyle="short"
 							timeStyle="short" value="${log.uploadDate}" /></td>
-					<td><c:out value="${log.assignedMetrics.size()}" /></td>
 					<td><spring:url value="/metrics/new?logId={logId}"
 							var="assignUrl">
 							<spring:param name="logId" value="${log.id}" />

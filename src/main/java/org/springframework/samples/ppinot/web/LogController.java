@@ -1,15 +1,11 @@
 package org.springframework.samples.ppinot.web;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.URI;
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.text.AbstractDocument.Content;
 import javax.validation.Valid;
 
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -74,7 +70,7 @@ public class LogController {
 			}
 
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/logs/download/")
-					.path(log.getTitle()).path("/db").toUriString();
+					.path(log.getTitle()).toUriString();
 			log.setDownloadUri(fileDownloadUri);
 			logService.save(log);
 			modelAndView = myLogs();
@@ -103,7 +99,7 @@ public class LogController {
 		return modelAndView;
 	}
 
-	@GetMapping("/download/{fileName:.+}/db")
+	@GetMapping("/download/{fileName:.+}")
 	public ResponseEntity downloadFromDB(@PathVariable String fileName) {
 		Log document = logService.findByName(fileName);
 		User user = userService.getPrincipal();
@@ -114,7 +110,7 @@ public class LogController {
 			return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/error-403")).build();
 		}
 		return ResponseEntity.ok().contentType(null)
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + ".log\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + ".mxml\"")
 				.body(document.getFile());
 	}
 

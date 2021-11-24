@@ -12,7 +12,6 @@
 		id="add-log-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
 			<form:hidden path="userId" />
-			<form:hidden path="assignedMetrics" />
 			<form:hidden path="uploadDate" />
 			<petclinic:inputField label="Title" name="title" />
 			<div class="${cssGroup}">

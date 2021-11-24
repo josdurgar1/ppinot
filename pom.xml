@@ -264,7 +264,19 @@
 						<artifactId>mockito-core</artifactId>
 						<version>${mockito.version}</version>
 					</dependency>
-				</dependencies>
+
+					<dependency>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+						<version>30.0-jre</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.mongodb</groupId>
+						<artifactId>bson</artifactId>
+						<version>4.1.0</version>
+					</dependency>
+			</dependencies>
 			</plugin>
 		</plugins>
 	</build>

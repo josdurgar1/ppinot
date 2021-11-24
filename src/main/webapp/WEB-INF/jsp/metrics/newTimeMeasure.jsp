@@ -14,10 +14,10 @@
 	<form:form modelAttribute="timeMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
+			<form:hidden path="from" />
+			<form:hidden path="to" />
 			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
 			<petclinic:inputField required="required" type="text" label="Description" name="description"></petclinic:inputField>
-			<petclinic:inputField required="required" label="From" name="from"></petclinic:inputField>
-			<petclinic:inputField required="required" label="To" name="to"></petclinic:inputField>
 		</div>
 
 		<div class="form-group has-feedback">

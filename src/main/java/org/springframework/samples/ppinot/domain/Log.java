@@ -1,6 +1,8 @@
 package org.springframework.samples.ppinot.domain;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import es.us.isa.ppinot.model.MeasureDefinition;
+import es.us.isa.ppinot.evaluation.Measure;
 import lombok.Data;
 
 @Data
@@ -24,12 +26,11 @@ public class Log implements Serializable{
 		super();
 	}
 	
-	public Log(String id, String title, byte[] file, Date uploadDate,List<String> assignedMetrics, String userId) {
+	public Log(String id, String title, byte[] file, Date uploadDate, String userId) {
 		this.id=id;
 		this.title=title;
 		this.file=file;
 		this.uploadDate=uploadDate;
-		this.assignedMetrics=assignedMetrics;
 		this.userId=userId;
 	}
 	
@@ -40,14 +41,12 @@ public class Log implements Serializable{
 	private String title;
 	
 	@NotNull
-	private byte[]  file;
+	private byte[] file;
 	
 //	@NotNull
 //	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date uploadDate;
-		
-	private List<String> assignedMetrics;
 	
 	@NotNull
 	private String userId;
