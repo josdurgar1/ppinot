@@ -11,9 +11,9 @@
 
 <petclinic:layout pageName="myLogs">
 	<h2>My Logs</h2>
-	<h3 class="error">
+	<div class="success">
 		<c:out value="${successMessage }"></c:out>
-	</h3>
+	</div>
 	<table id="logsTable" class="table table-striped">
 		<thead>
 			<tr>
@@ -52,7 +52,7 @@
 
 <script>
 	function sample() {
-		confirmed = confirm("Press a button!");
+		confirmed = confirm("Delete Log!?");
 		if (confirmed) {
 			window.location="${fn:escapeXml(deleteUrl)}";
 		} else {

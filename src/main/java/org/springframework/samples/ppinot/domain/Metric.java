@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import es.us.isa.ppinot.evaluation.Measure;
 import lombok.Data;
@@ -22,6 +23,11 @@ public class Metric  implements Serializable{/**
 	@Id
 	private String id;
 	
+	@NotNull
+	private String name;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date creationDate;
 	
 	private List<Measure> measure;
 	

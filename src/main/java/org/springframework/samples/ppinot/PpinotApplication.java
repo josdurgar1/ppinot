@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.ppinot.model.Role;
 import org.springframework.samples.ppinot.model.User;
 import org.springframework.samples.ppinot.repository.LogRepository;
+import org.springframework.samples.ppinot.repository.MetricRepository;
 import org.springframework.samples.ppinot.repository.RoleRepository;
 import org.springframework.samples.ppinot.repository.UserRepository;
 
@@ -27,6 +28,8 @@ public class PpinotApplication implements CommandLineRunner {
 	RoleRepository role2Repository;
 	@Autowired
 	LogRepository archiveRepository;
+	@Autowired
+	MetricRepository metricRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PpinotApplication.class, args);
@@ -42,6 +45,9 @@ public class PpinotApplication implements CommandLineRunner {
 		System.out.println("Deleting all records..");
 		userRepository.deleteAll();
 		archiveRepository.deleteAll();
+		metricRepository.deleteAll();
+		System.out.println("Deleted!!");
+		
 	}
 
 //	public void addSampleData() {
@@ -81,7 +87,8 @@ public class PpinotApplication implements CommandLineRunner {
 			role.add(admin2Role);
 			u.setRoles(role);
 			userRepository.save(u);
-
+			System.out.println("Added!!");
+			
 			Role userRole = roleRepository.findByRole("USER");
 			if (userRole == null) {
 				Role newUserRole = new Role();
@@ -106,6 +113,7 @@ public class PpinotApplication implements CommandLineRunner {
 			role2.add(admin3Role);
 			u2.setRoles(role2);
 			userRepository.save(u2);
+			System.out.println("Added!!");
 			System.out.println("Finished...");
 		};
 		

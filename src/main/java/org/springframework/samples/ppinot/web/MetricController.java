@@ -1,5 +1,7 @@
 package org.springframework.samples.ppinot.web;
 
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class MetricController {
 	private LogService logService;
 	@Autowired
 	private MetricService metricService;
+	@Autowired
+	private LogController logController;
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView new_(@RequestParam String logId) {
@@ -71,14 +75,15 @@ public class MetricController {
 	public ModelAndView newTimeMeasure(@RequestParam String logId, TimeMeasure timeMeasure,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		timeMeasure.setFrom(new TimeInstantCondition("Register FI", GenericState.START));
-		timeMeasure.setTo(new TimeInstantCondition("Close FI", GenericState.END));
-		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("/metrics/newTimeMeasure");
-			modelAndView.addObject("scale_", Scale.values());
-			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
-		} else {
+		
+		timeMeasure.setFrom(new TimeInstantCondition(timeMeasure.getFrom()+"", GenericState.START));
+		timeMeasure.setTo(new TimeInstantCondition(timeMeasure.getTo()+"", GenericState.END));
+//		if (bindingResult.hasErrors()) {
+//			modelAndView.setViewName("/metrics/newTimeMeasure");
+//			modelAndView.addObject("scale_", Scale.values());
+//			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+//			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
+//		} else {
 			try {
 				metricService.addTimeMeasure(logId, timeMeasure);
 			} catch (Exception e) {
@@ -86,10 +91,13 @@ public class MetricController {
 				e.printStackTrace();
 			}
 
-			modelAndView.setViewName("/logs/myLogs");
+//			Set<Log> myLogs = logService.myLogs();
+//			modelAndView.addObject("myLogs", myLogs);
+//			modelAndView.setViewName("log/list");
+			modelAndView = logController.logDetails(logId);
 			modelAndView.addObject("successMessage", "New TimeMeasure has been add successfully");
 
-		}
+//		}
 
 		return modelAndView;
 

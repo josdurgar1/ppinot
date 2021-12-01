@@ -2,7 +2,7 @@ package org.springframework.samples.ppinot.web;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -12,8 +12,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.ppinot.domain.Log;
+import org.springframework.samples.ppinot.domain.Metric;
 import org.springframework.samples.ppinot.model.User;
 import org.springframework.samples.ppinot.service.LogService;
+import org.springframework.samples.ppinot.service.MetricService;
 import org.springframework.samples.ppinot.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,6 +38,9 @@ public class LogController {
 	private LogService logService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MetricService metricService;
+	
 
 	@RequestMapping(value = "/myLogs", method = RequestMethod.GET)
 	public ModelAndView myLogs() {
@@ -104,9 +109,11 @@ public class LogController {
 			modelAndView.setViewName("error-403");
 			return modelAndView;
 		}
+		List<Metric>metrics=metricService.findByLogId(logId);
 		modelAndView.addObject("log", log);
 //		modelAndView.addObject("file2", file2);
 		modelAndView.setViewName("log/details");
+		modelAndView.addObject("metrics",metrics);
 		return modelAndView;
 	}
 

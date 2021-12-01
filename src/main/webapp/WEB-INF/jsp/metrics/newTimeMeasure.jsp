@@ -9,15 +9,17 @@
 
 <petclinic:layout pageName="newTimemeasure">
 
-<h1>New TimeMeasure</h1>
+	<h1>New TimeMeasure</h1>
 
 	<form:form modelAttribute="timeMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
-			<form:hidden path="from" />
-			<form:hidden path="to" />
 			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
-			<petclinic:inputField required="required" type="text" label="Description" name="description"></petclinic:inputField>
+			<petclinic:inputField required="required" type="text"
+				label="Description" name="description"></petclinic:inputField>
+			<petclinic:inputField required="required" label="From" name="from"></petclinic:inputField>
+			<petclinic:inputField required="required" type="text"
+				label="To" name="to"></petclinic:inputField>
 		</div>
 
 		<div class="form-group has-feedback">
@@ -46,12 +48,13 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group has-feedback">
 			<div class="${cssGroup}">
 				<label class="col-sm-2 control-label">TimeMeasureType </label>
 				<div class="col-sm-10">
-					<select id="timeMeasureType" name="timeMeasureType" required="required">
+					<select id="timeMeasureType" name="timeMeasureType"
+						required="required">
 						<jstl:forEach items="${timeMeasureType}" var="item">
 							<option value="${item}"><jstl:out value="${item }"></jstl:out></option>
 						</jstl:forEach>
@@ -64,8 +67,8 @@
 				<button class="btn btn-default" type="submit">Add Log</button>
 			</div>
 		</div>
-		
-		
+
+
 	</form:form>
 
 

@@ -1,10 +1,8 @@
 package org.springframework.samples.ppinot.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,7 +20,6 @@ import es.us.isa.ppinot.evaluation.logs.LogProvider;
 import es.us.isa.ppinot.evaluation.logs.MXMLLog;
 import es.us.isa.ppinot.model.MeasureDefinition;
 import es.us.isa.ppinot.model.base.TimeMeasure;
-import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 import es.us.isa.ppinot.model.scope.Period;
 import es.us.isa.ppinot.model.scope.SimpleTimeFilter;
 
@@ -41,16 +38,22 @@ public class MetricService {
 		Metric result=new Metric();
 		List<Measure> measure = compute(timeMeasure, logId);
 //		log.getAssignedMetrics().add(result);
+		result.setName(timeMeasure.getName());
+		Date date = new Date();
+		result.setCreationDate(date);
 		result.setLogId(logId);
 		result.setMeasure(measure);
 		metricRepository.save(result);
 	}
 
 	private List<Measure> compute(MeasureDefinition measure, String logId) throws Exception {
-
-		File file=generateFile(logId);
+		Log log = logService.findById(logId);
+//		InputStream is= new FileInputStream(log.getTitle()+".mxml");
+		InputStream is= new ByteArrayInputStream(log.getFile());
+//		is.read(log.getFile());
+//		is.close(); 
 		
-		LogProvider mxmlLog = new MXMLLog(new FileInputStream(file), null);
+		LogProvider mxmlLog = new MXMLLog(is, null);
 
 		MeasureEvaluator evaluator = new LogMeasureEvaluator(mxmlLog);
 
@@ -58,23 +61,6 @@ public class MetricService {
 
 	}
 
-	private File generateFile(String logId) throws FileNotFoundException {
-		Log log = logService.findById(logId);
-		String FILEPATH = "C:"+"\\"+log.getTitle();
-		File file = new File(FILEPATH);
-		try {
-			OutputStream os = new FileOutputStream(file);
-			// Starts writing the bytes in it
-			os.write(log.getFile());
-			// Close the file
-			os.close();
-		}
-
-		catch (Exception e) {
-			System.out.println("Exception: " + e);
-		}
-		return file;
-	}
 
 	public void deleteAssociateMetric(String logId) {
 
@@ -82,6 +68,13 @@ public class MetricService {
 		for(Metric t:metrics) {
 			metricRepository.delete(t);
 		}
+		
+	}
+	
+	public List<Metric> findByLogId(String logId){
+		List<Metric> result;
+		result=metricRepository.findByLogId(logId);
+		return result;
 		
 	}
 }

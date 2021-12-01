@@ -7,7 +7,7 @@
 
     <div class="text-center">
                   <form class="form-signin" action="/login" method="post">
-                <img class="mb-4" src="https://www.pinclipart.com/picdir/middle/416-4167138_login-icon-vector-png-clipart.png" alt="" width="72" height="72" />
+                <img class="mb-4" src="/resources/images/avatar.png" alt="" width="72" height="72" />
                 
                  <div >
         

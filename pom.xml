@@ -276,7 +276,14 @@
 						<artifactId>bson</artifactId>
 						<version>4.1.0</version>
 					</dependency>
-			</dependencies>
+					<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb1-impl -->
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb1-impl</artifactId>
+						<version>2.2.4</version>
+					</dependency>
+
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
