@@ -19,7 +19,12 @@
 				<label class="col-sm-2 control-label">File: </label>
 				<div class="col-sm-10">
 					<input type="file" name="file" size="50" required="required" />
-					<p style="color:gray">Only select file with '.log' extension</p>
+					<c:if test="${!extensionError}">
+					<p style="color:gray">Only select file with '.mxml' extension</p>
+					</c:if>
+					<c:if test="${extensionError}">
+					<h3 style="color:red">Only select file with '.mxml' extension</h3>
+					</c:if>
 					<c:if test="${valid}">
 						<span class="glyphicon glyphicon-ok form-control-feedback"
 							aria-hidden="true"></span>

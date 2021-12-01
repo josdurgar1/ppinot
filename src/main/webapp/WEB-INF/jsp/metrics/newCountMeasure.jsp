@@ -9,7 +9,7 @@
 
 <petclinic:layout pageName="newCountmeasure">
 
-	<form:form modelAttribute="countMeasure" class="form-horizontal"
+	<!--<form:form modelAttribute="countMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
 			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
@@ -50,7 +50,12 @@
 		</div>
 		
 		
-	</form:form>
+	</form:form>-->
+
+<form:form enctype="multipart/form-data">
+<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
+
+</form:form>
 
 
 </petclinic:layout>

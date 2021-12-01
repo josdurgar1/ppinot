@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MetricRepository extends MongoRepository<Metric, String>{
 	
-	public List<List<Metric>> findByLogId(String logId);
+	public List<Metric> findByLogId(String logId);
 
 }

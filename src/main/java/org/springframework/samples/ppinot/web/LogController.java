@@ -2,6 +2,7 @@ package org.springframework.samples.ppinot.web;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.google.common.io.Files;
 
 @Controller
 @RequestMapping("/logs")
@@ -56,6 +59,14 @@ public class LogController {
 	public ModelAndView saveNewLog(@Valid Log log, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file) {
 		ModelAndView modelAndView = new ModelAndView();
+		String extension = Files.getFileExtension(file.getOriginalFilename());
+
+		if (!(extension.equals("mxml"))) {
+			modelAndView.setViewName("log/add");
+			modelAndView.addObject("log", log);
+			modelAndView.addObject("extensionError", true);
+			return modelAndView;
+		}
 		if (bindingResult.getErrorCount() > 1) {
 			modelAndView.setViewName("log/add");
 			modelAndView.addObject("log", log);
@@ -65,7 +76,7 @@ public class LogController {
 				log.setFile(file.getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
-			}catch(IllegalStateException f) {
+			} catch (IllegalStateException f) {
 				modelAndView.addObject("messasge", f.getMessage());
 			}
 
@@ -124,7 +135,7 @@ public class LogController {
 			return modelAndView;
 		}
 		logService.delete(log);
-		modelAndView=myLogs();
+		modelAndView = myLogs();
 		modelAndView.addObject("successMessage", "Log and associated measures has been delete successfully");
 		return modelAndView;
 	}

@@ -36,6 +36,8 @@ public class LogService {
 	private LogRepository logRepository;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MetricService metricService;
 
 	public Set<Log> myLogs(User user) {
 		Set<Log> myLogs;
@@ -98,6 +100,8 @@ public class LogService {
 
 	public void delete(Log log) {
 
+		metricService.deleteAssociateMetric(log.getId());
+	
 		logRepository.delete(log);
 
 	}

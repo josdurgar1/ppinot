@@ -75,4 +75,13 @@ public class MetricService {
 		}
 		return file;
 	}
+
+	public void deleteAssociateMetric(String logId) {
+
+		List<Metric> metrics=metricRepository.findByLogId(logId);
+		for(Metric t:metrics) {
+			metricRepository.delete(t);
+		}
+		
+	}
 }

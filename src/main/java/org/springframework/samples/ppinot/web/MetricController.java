@@ -20,6 +20,7 @@ import es.us.isa.ppinot.model.base.TimeMeasure;
 import es.us.isa.ppinot.model.condition.DataPropertyCondition;
 import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 import es.us.isa.ppinot.model.condition.TimeMeasureType;
+import es.us.isa.ppinot.model.state.GenericState;
 import es.us.isa.ppinot.model.state.RuntimeState;
 
 @Controller
@@ -58,14 +59,6 @@ public class MetricController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("log", log);
 		TimeMeasure timeMeasure = new TimeMeasure();
-		TimeInstantCondition from= new TimeInstantCondition();
-		TimeInstantCondition to=new TimeInstantCondition();
-		DataPropertyCondition dfrom=new DataPropertyCondition("Record mid request","complete");
-		DataPropertyCondition dto=new DataPropertyCondition("Plan FI","complete");
-		from.setPrecondition(dfrom);
-		to.setPrecondition(dto);
-		timeMeasure.setFrom(from);
-		timeMeasure.setTo(to);
 		modelAndView.addObject("timeMeasure", timeMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
@@ -78,20 +71,14 @@ public class MetricController {
 	public ModelAndView newTimeMeasure(@RequestParam String logId, TimeMeasure timeMeasure,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		TimeInstantCondition from= new TimeInstantCondition();
-		TimeInstantCondition to=new TimeInstantCondition();
-		DataPropertyCondition dfrom=new DataPropertyCondition("Record mid request","complete");
-		DataPropertyCondition dto=new DataPropertyCondition("Plan FI","complete");
-		from.setPrecondition(dfrom);
-		to.setPrecondition(dto);
-		timeMeasure.setFrom(from);
-		timeMeasure.setTo(to);
-//		if (bindingResult.hasErrors()) {
-//			modelAndView.setViewName("/metrics/newTimeMeasure");
-//			modelAndView.addObject("scale_", Scale.values());
-//			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-//			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
-//		} else {
+		timeMeasure.setFrom(new TimeInstantCondition("Register FI", GenericState.START));
+		timeMeasure.setTo(new TimeInstantCondition("Close FI", GenericState.END));
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("/metrics/newTimeMeasure");
+			modelAndView.addObject("scale_", Scale.values());
+			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
+		} else {
 			try {
 				metricService.addTimeMeasure(logId, timeMeasure);
 			} catch (Exception e) {
@@ -102,7 +89,7 @@ public class MetricController {
 			modelAndView.setViewName("/logs/myLogs");
 			modelAndView.addObject("successMessage", "New TimeMeasure has been add successfully");
 
-//		}
+		}
 
 		return modelAndView;
 
