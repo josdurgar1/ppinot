@@ -17,9 +17,40 @@
 			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
 			<petclinic:inputField required="required" type="text"
 				label="Description" name="description"></petclinic:inputField>
-			<petclinic:inputField required="required" label="From" name="from"></petclinic:inputField>
-			<petclinic:inputField required="required" type="text"
-				label="To" name="to"></petclinic:inputField>
+
+			<petclinic:inputField required="required" label="From"
+				name="appliesFrom"></petclinic:inputField>
+				
+				<div class="form-group has-feedback">
+			<div class="${cssGroup}">
+				<label class="col-sm-2 control-label">GenericState </label>
+				<div class="col-sm-10">
+					<select id="from" name="from" required="required">
+						<jstl:forEach items="${state}" var="item">
+							<option value="${item}"><jstl:out value="${item }"></jstl:out></option>
+						</jstl:forEach>
+					</select>
+				</div>
+			</div>
+		</div>
+
+			<petclinic:inputField required="required" type="text" label="To"
+				name="appliesTo"></petclinic:inputField>
+					
+				<div class="form-group has-feedback">
+			<div class="${cssGroup}">
+				<label class="col-sm-2 control-label">GenericState </label>
+				<div class="col-sm-10">
+					<select id="to" name="to" required="required">
+						<jstl:forEach items="${state}" var="item">
+							<option value="${item}"><jstl:out value="${item }"></jstl:out></option>
+						</jstl:forEach>
+					</select>
+				</div>
+			</div>
+		</div>
+				
+				
 		</div>
 
 		<div class="form-group has-feedback">

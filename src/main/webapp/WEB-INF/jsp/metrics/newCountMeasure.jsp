@@ -9,13 +9,16 @@
 
 <petclinic:layout pageName="newCountmeasure">
 
-	<!--<form:form modelAttribute="countMeasure" class="form-horizontal"
+	<h1>New CountMeasure</h1>
+
+	<form:form modelAttribute="countMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
 			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
-			<petclinic:inputField required="required" type="text" label="Description" name="description"></petclinic:inputField>
-		</div>
-
+			<petclinic:inputField required="required" type="text"
+				label="Description" name="description"></petclinic:inputField>
+</div>
+			
 		<div class="form-group has-feedback">
 			<div class="${cssGroup}">
 				<label class="col-sm-2 control-label">Scale </label>
@@ -42,20 +45,30 @@
 				</div>
 			</div>
 		</div>
-		<petclinic:inputField required="required" label="Applies To" name="appliesTo"></petclinic:inputField>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-default" type="submit">Add Measure</button>
+		<petclinic:inputField required="required" label="When"
+				name="appliesWhen"></petclinic:inputField>
+				
+				<div class="form-group has-feedback">
+			<div class="${cssGroup}">
+				<label class="col-sm-2 control-label">GenericState </label>
+				<div class="col-sm-10">
+					<select id="when" name="when" required="required">
+						<jstl:forEach items="${when}" var="item">
+							<option value="${item}"><jstl:out value="${item }"></jstl:out></option>
+						</jstl:forEach>
+					</select>
+				</div>
 			</div>
 		</div>
-		
-		
-	</form:form>-->
+	
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-default" type="submit">Add Log</button>
+			</div>
+		</div>
 
-<form:form enctype="multipart/form-data">
-<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
 
-</form:form>
+	</form:form>
 
 
 </petclinic:layout>

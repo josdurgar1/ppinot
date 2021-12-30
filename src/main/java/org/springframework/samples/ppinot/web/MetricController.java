@@ -1,12 +1,15 @@
 package org.springframework.samples.ppinot.web;
 
-import java.util.Set;
-
-import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.ppinot.domain.CountMeasureForm;
 import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.Scale;
+import org.springframework.samples.ppinot.domain.TimeMeasureForm;
 import org.springframework.samples.ppinot.domain.UnitOfMeasure;
 import org.springframework.samples.ppinot.service.LogService;
 import org.springframework.samples.ppinot.service.MetricService;
@@ -17,13 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.us.isa.ppinot.model.base.CountMeasure;
-import es.us.isa.ppinot.model.base.TimeMeasure;
-import es.us.isa.ppinot.model.condition.DataPropertyCondition;
-import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 import es.us.isa.ppinot.model.condition.TimeMeasureType;
+import es.us.isa.ppinot.model.state.BPMNState;
+import es.us.isa.ppinot.model.state.ComplexState;
 import es.us.isa.ppinot.model.state.GenericState;
-import es.us.isa.ppinot.model.state.RuntimeState;
 
 @Controller
 @RequestMapping("/metrics")
@@ -49,11 +49,43 @@ public class MetricController {
 		Log log = logService.findById(logId);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("log", log);
-		CountMeasure countMeasure = new CountMeasure();
+		CountMeasureForm countMeasure = new CountMeasureForm();
 		modelAndView.addObject("countMeasure", countMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+//		modelAndView.addObject("when", GenericState.values());
+		List<String>when = new ArrayList<>();
+		when.add(GenericState.START.toString());
+		when.add(GenericState.END.toString());
+		modelAndView.addObject("when", when);
 		modelAndView.setViewName("/metrics/newCountMeasure");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/newCountMeasure", method = RequestMethod.POST)
+	public ModelAndView newCountMeasure(@RequestParam String logId, CountMeasureForm countMeasure,
+			BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("/metrics/newCountMeasure");
+			modelAndView.addObject("scale_", Scale.values());
+			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+			List<String>when = new ArrayList<>();
+			when.add(GenericState.START.toString());
+			when.add(GenericState.END.toString());
+			modelAndView.addObject("when", when);
+		} else {
+			try {
+				metricService.addCountMeasure(logId, countMeasure);
+			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			modelAndView = logController.logDetails(logId);
+			modelAndView.addObject("successMessage", "New TimeMeasure has been add successfully");
+
+		}
 		return modelAndView;
 	}
 
@@ -62,28 +94,32 @@ public class MetricController {
 		Log log = logService.findById(logId);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("log", log);
-		TimeMeasure timeMeasure = new TimeMeasure();
+		TimeMeasureForm timeMeasure = new TimeMeasureForm();
 		modelAndView.addObject("timeMeasure", timeMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
 		modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
+		modelAndView.addObject("state", GenericState.values());
 		modelAndView.setViewName("/metrics/newTimeMeasure");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/newTimeMeasure", method = RequestMethod.POST)
-	public ModelAndView newTimeMeasure(@RequestParam String logId, TimeMeasure timeMeasure,
+	public ModelAndView newTimeMeasure(@RequestParam String logId, TimeMeasureForm timeMeasure,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		
-		timeMeasure.setFrom(new TimeInstantCondition(timeMeasure.getFrom()+"", GenericState.START));
-		timeMeasure.setTo(new TimeInstantCondition(timeMeasure.getTo()+"", GenericState.END));
-//		if (bindingResult.hasErrors()) {
-//			modelAndView.setViewName("/metrics/newTimeMeasure");
-//			modelAndView.addObject("scale_", Scale.values());
-//			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-//			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
-//		} else {
+
+//		String appliesTo1= timeMeasure.getFrom().toString();
+//		String appliesTo2= timeMeasure.getTo().toString();
+//		
+//		timeMeasure.setFrom(new TimeInstantCondition(appliesTo1, GenericState.START));
+//		timeMeasure.setTo(new TimeInstantCondition(appliesTo2, GenericState.END));
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("/metrics/newTimeMeasure");
+			modelAndView.addObject("scale_", Scale.values());
+			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+			modelAndView.addObject("timeMeasureType", TimeMeasureType.values());
+		} else {
 			try {
 				metricService.addTimeMeasure(logId, timeMeasure);
 			} catch (Exception e) {
@@ -97,10 +133,9 @@ public class MetricController {
 			modelAndView = logController.logDetails(logId);
 			modelAndView.addObject("successMessage", "New TimeMeasure has been add successfully");
 
-//		}
+		}
 
 		return modelAndView;
 
 	}
-
 }
