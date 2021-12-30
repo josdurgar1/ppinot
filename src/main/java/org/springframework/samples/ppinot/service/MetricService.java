@@ -57,17 +57,17 @@ public class MetricService {
 		result.setCreationDate(date);
 		result.setLogId(logId);
 		result.setDescription(timeMeasure.getDescription());
-		result.setFrom(timeMeasure.getFrom());
-		result.setTo(timeMeasure.getTo());
+//		result.setFrom(timeMeasure.getFrom());
+//		result.setTo(timeMeasure.getTo());
 		result.setScale(timeMeasure.getScale());
 		result.setTimeMeasureType(timeMeasure.getTimeMeasureType());
 		result.setUnitOfMeasure(timeMeasure.getUnitOfMeasure());
-		result.setTypeMeasure(timeMeasure.getClass().toString());
+		result.setTypeMeasure(timeMeasure.getClass().toString().substring(34));
 		List<MeasureRedefined> mR = new ArrayList<MeasureRedefined>();
 		for (Measure m : measures) {
 			MeasureRedefined r = new MeasureRedefined();
 			r.setEvidences(m.getEvidences());
-			r.setMeasureScope(m.getMeasureScope());
+			r.setMeasureScopeRedefined(m.getMeasureScope());
 			r.setValue(r.getValue());
 			mR.add(r);
 		}
@@ -102,7 +102,7 @@ public class MetricService {
 	public List<Metric> findByLogId(String logId) {
 		List<Metric> result;
 		String logId2 = logId;
-		result = metricRepository.findByLogId(logId);
+		result = metricRepository.findByLogId(logId2);
 		return result;
 
 	}
@@ -121,15 +121,15 @@ public class MetricService {
 		result.setCreationDate(date);
 		result.setLogId(logId);
 		result.setDescription(countMeasure.getDescription());
-		result.setWhen(countMeasure.getWhen());
+//		result.setWhen(countMeasure.getWhen());
 		result.setScale(countMeasure.getScale());
 		result.setUnitOfMeasure(countMeasure.getUnitOfMeasure());
-		result.setTypeMeasure(countMeasure.getClass().toString());
+		result.setTypeMeasure(countMeasure.getClass().toString().substring(34));
 		List<MeasureRedefined> mR = new ArrayList<MeasureRedefined>();
 		for (Measure m : measures) {
 			MeasureRedefined r = new MeasureRedefined();
 			r.setEvidences(m.getEvidences());
-			r.setMeasureScope(m.getMeasureScope());
+			r.setMeasureScopeRedefined(m.getMeasureScope());
 			r.setValue(r.getValue());
 			mR.add(r);
 		}

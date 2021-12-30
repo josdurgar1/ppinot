@@ -5,10 +5,7 @@ import java.util.Locale;
 
 import org.springframework.format.Formatter;
 
-import es.us.isa.ppinot.evaluation.matchers.DataObjectStateMatcher;
 import es.us.isa.ppinot.model.state.BPMNState;
-import es.us.isa.ppinot.model.state.ComplexState;
-import es.us.isa.ppinot.model.state.DataObjectState;
 import es.us.isa.ppinot.model.state.GenericState;
 import es.us.isa.ppinot.model.state.RuntimeState;
 

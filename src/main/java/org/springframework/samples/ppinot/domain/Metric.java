@@ -36,9 +36,9 @@ public class Metric  implements Serializable{/**
 	@NotNull
 	private String description;
 
-	private TimeInstantCondition from;
-	private TimeInstantCondition to;
-	private TimeInstantCondition when;
+//	private TimeInstantCondition from;
+//	private TimeInstantCondition to;
+//	private TimeInstantCondition when;
 	private TimeMeasureType timeMeasureType;
 	private String scale;
 	private String unitOfMeasure;
