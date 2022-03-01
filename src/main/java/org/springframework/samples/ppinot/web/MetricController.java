@@ -11,6 +11,7 @@ import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.Scale;
 import org.springframework.samples.ppinot.domain.TimeMeasureForm;
 import org.springframework.samples.ppinot.domain.UnitOfMeasure;
+import org.springframework.samples.ppinot.domain.WhenState;
 import org.springframework.samples.ppinot.service.LogService;
 import org.springframework.samples.ppinot.service.MetricService;
 import org.springframework.stereotype.Controller;
@@ -53,11 +54,7 @@ public class MetricController {
 		modelAndView.addObject("countMeasure", countMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-//		modelAndView.addObject("when", GenericState.values());
-		List<String>when = new ArrayList<>();
-		when.add(GenericState.START.toString());
-		when.add(GenericState.END.toString());
-		modelAndView.addObject("when", when);
+		modelAndView.addObject("when", WhenState.values());
 		modelAndView.setViewName("/metrics/newCountMeasure");
 		return modelAndView;
 	}
@@ -83,7 +80,7 @@ public class MetricController {
 				e.printStackTrace();
 			}
 			modelAndView = logController.logDetails(logId);
-			modelAndView.addObject("successMessage", "New TimeMeasure has been add successfully");
+			modelAndView.addObject("successMessage", "New CountMeasure has been add successfully");
 
 		}
 		return modelAndView;

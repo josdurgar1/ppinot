@@ -14,6 +14,7 @@ import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.MeasureRedefined;
 import org.springframework.samples.ppinot.domain.Metric;
 import org.springframework.samples.ppinot.domain.TimeMeasureForm;
+import org.springframework.samples.ppinot.domain.WhenState;
 import org.springframework.samples.ppinot.repository.MetricRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ import es.us.isa.ppinot.model.base.TimeMeasure;
 import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 import es.us.isa.ppinot.model.scope.Period;
 import es.us.isa.ppinot.model.scope.SimpleTimeFilter;
+import es.us.isa.ppinot.model.state.BPMNState;
 import es.us.isa.ppinot.model.state.GenericState;
 import es.us.isa.ppinot.model.state.RuntimeState;
 
@@ -114,7 +116,7 @@ public class MetricService {
 		countMeasure.setDescription(countMeasureForm.getDescription());
 		countMeasure.setScale(countMeasureForm.getScale());
 		countMeasure.setUnitOfMeasure(countMeasureForm.getUnitOfMeasure());
-		countMeasure.setWhen(new TimeInstantCondition(countMeasureForm.getAppliesWhen(), countMeasureForm.getWhen()));
+		countMeasure.setWhen(new TimeInstantCondition(countMeasureForm.getAppliesWhen(), state(countMeasureForm.getWhen())));
 		List<Measure> measures = compute(countMeasure, logId);
 		result.setName(countMeasure.getName());
 		Date date = new Date();
@@ -136,5 +138,61 @@ public class MetricService {
 		result.setMeasure(mR);
 		metricRepository.save(result);
 
+	}
+	
+	
+	private RuntimeState state(WhenState text) {
+		RuntimeState result = null;
+		
+		switch (text) {
+		case START:
+			result = GenericState.START;
+			break;
+		case END:
+			result = GenericState.END;
+			break;
+		case READY:
+			result = BPMNState.READY;
+			break;
+		case ACTIVE:
+			result = BPMNState.ACTIVE;
+			break;
+		case WITHDRAWN:
+			result = BPMNState.WITHDRAWN;
+			break;
+		case COMPLETING:
+			result = BPMNState.COMPLETING;
+			break;
+		case COMPLETED:
+			result = BPMNState.COMPLETED;
+			break;
+		case FAILING:
+			result = BPMNState.FAILING;
+			break;
+		case FAILED:
+			result = BPMNState.FAILED;
+			break;
+		case TERMINATING:
+			result = BPMNState.TERMINATING;
+			break;
+		case TERMINATED:
+			result = BPMNState.TERMINATED;
+			break;
+		case COMPENSATING:
+			result = BPMNState.COMPENSATING;
+			break;
+		case COMPENSATED:
+			result = BPMNState.COMPENSATED;
+			break;
+		case EXECUTING:
+			result = BPMNState.EXECUTING;
+			break;
+		case DELETED:
+			result = BPMNState.DELETED;
+			break;
+		}		
+		
+		return result;
+		
 	}
 }
