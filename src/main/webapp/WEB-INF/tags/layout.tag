@@ -25,10 +25,10 @@
 
         <jsp:doBody/>
 
-        <petclinic:pivotal/>
+        <ppinot:pivotal/>
     </div>
 </div>
-<petclinic:footer/>
+<ppinot:footer/>
 <jsp:invoke fragment="customScript" />
 
 
