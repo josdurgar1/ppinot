@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
@@ -22,59 +22,59 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<petclinic:menuItem active="${name eq 'home'}" url="/"
+				<ppinot:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span>Home</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 				<!--
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
+				<ppinot:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					<span>Find owners</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 -->
 				<!--
-				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
+				<ppinot:menuItem active="${name eq 'vets'}" url="/vets"
 					title="veterinarians">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarians</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 
-				<petclinic:menuItem active="${name eq 'dashboard'}" url="/dashboard"
+				<ppinot:menuItem active="${name eq 'dashboard'}" url="/dashboard"
 					title="Admin Dashboard">
 					<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
 					<span>Dashboard</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 	-->
-				<petclinic:menuItem active="${name eq 'news'}" url="/news"
+				<ppinot:menuItem active="${name eq 'news'}" url="/news"
 					title="News">
 					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 					<span>News</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 
 <!--
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+				<ppinot:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</petclinic:menuItem>
+				</ppinot:menuItem>
 
 -->
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'myLogs'}" url="/logs/myLogs"
+					<ppinot:menuItem active="${name eq 'myLogs'}" url="/logs/myLogs"
 						title="My Logs">
 						<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 						<span>My Logs</span>
-					</petclinic:menuItem>
+					</ppinot:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<petclinic:menuItem active="${name eq 'newLog'}" url="/logs/newLog"
+					<ppinot:menuItem active="${name eq 'newLog'}" url="/logs/newLog"
 						title="New Log">
 						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 						<span>New Log</span>
-					</petclinic:menuItem>
+					</ppinot:menuItem>
 				</sec:authorize>
 			</ul>
 

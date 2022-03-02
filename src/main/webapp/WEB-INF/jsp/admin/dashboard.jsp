@@ -4,9 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 
-<petclinic:layout pageName="dashboard">
+<ppinot:layout pageName="dashboard">
 
 	<h2>
 		<c:if test="${username['new']}">New </c:if>
@@ -16,4 +16,4 @@
 		<c:out value="${adminMessage }"></c:out>
 	</h3>
 
-</petclinic:layout>
+</ppinot:layout>

@@ -4,25 +4,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="users">
+<ppinot:layout pageName="users">
     <h2>
         <c:if test="${user['new']}">New </c:if> User
     </h2>
     <h3><c:out value="${successMessage }"></c:out></h3>
     <form:form modelAttribute="user" class="form-horizontal" id="add-user-form">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="First Name" name="firstName"/>
-            <petclinic:inputField label="Last Name" name="lastName"/>
-            <petclinic:inputField label="Email" name="email"/>
-            <petclinic:inputField label="Address" name="address"/>
-            <petclinic:inputField label="City" name="city"/>
-            <petclinic:inputField label="Telephone" name="telephone"/>
-            <petclinic:inputField label="Username" name="username"/>
+            <ppinot:inputField label="First Name" name="firstName"/>
+            <ppinot:inputField label="Last Name" name="lastName"/>
+            <ppinot:inputField label="Email" name="email"/>
+            <ppinot:inputField label="Address" name="address"/>
+            <ppinot:inputField label="City" name="city"/>
+            <ppinot:inputField label="Telephone" name="telephone"/>
+            <ppinot:inputField label="Username" name="username"/>
            <c:choose>
                     <c:when test="${user['new']}">
-            <petclinic:inputField type="password" label="Password" name="password"/>
+            <ppinot:inputField type="password" label="Password" name="password"/>
             </c:when>
              <c:otherwise>
              <form:hidden path="password"/>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </form:form>
-</petclinic:layout>
+</ppinot:layout>

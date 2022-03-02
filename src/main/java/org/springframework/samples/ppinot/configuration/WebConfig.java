@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.samples.ppinot.util.RuntimeStateFormatter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -24,8 +23,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		RuntimeStateFormatter runtimeStateFormatter = new RuntimeStateFormatter();
-		registry.addFormatter(runtimeStateFormatter);
 		registry.addConverter(idToEntityConverter);
 	}
 

@@ -4,12 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 
 
 
 
-<petclinic:layout pageName="myLogs">
+<ppinot:layout pageName="myLogs">
 	<h2>My Logs</h2>
 	<div class="success">
 		<c:out value="${successMessage }"></c:out>
@@ -60,4 +60,4 @@
 	}
 </script>
 
-</petclinic:layout>
+</ppinot:layout>

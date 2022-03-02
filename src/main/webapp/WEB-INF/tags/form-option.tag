@@ -4,7 +4,7 @@
 <%@tag language="java" body-content="empty"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags" %>
  
 <%@attribute name="value" required="true" type="java.lang.String"%>
 <%@attribute name="code" required="true" type="java.lang.String"%>
@@ -15,5 +15,5 @@
 </jstl:if>
 
 <option value="${value}" <jstl:if test="${selected}">selected</jstl:if>>
-	<petclinic:message code="${code}"/>
+	<ppinot:message code="${code}"/>
 </option>

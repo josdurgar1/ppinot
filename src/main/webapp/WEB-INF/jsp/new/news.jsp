@@ -4,9 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 
-<petclinic:layout pageName="news">
+<ppinot:layout pageName="news">
 
 	<h2>Last Changes</h2>
 	<p>--------------------</p>
@@ -35,4 +35,4 @@
 		</tbody>
 	</table>
 
-</petclinic:layout>
+</ppinot:layout>

@@ -7,7 +7,7 @@
 %>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 
 <%@attribute name="var" required="false" type="java.lang.String"%>
 <%@attribute name="value" required="true" type="java.lang.Object"%>

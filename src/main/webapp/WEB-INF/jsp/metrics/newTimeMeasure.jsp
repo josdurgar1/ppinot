@@ -4,22 +4,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
 
-<petclinic:layout pageName="newTimemeasure">
+<ppinot:layout pageName="newTimemeasure">
 
 	<h1>New TimeMeasure</h1>
 
 	<form:form modelAttribute="timeMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
-			<petclinic:inputField required="required" label="Name" name="name"></petclinic:inputField>
-			<petclinic:inputField required="required" type="text"
-				label="Description" name="description"></petclinic:inputField>
+			<ppinot:inputField required="required" label="Name" name="name"></ppinot:inputField>
+			<ppinot:inputField required="required" type="text"
+				label="Description" name="description"></ppinot:inputField>
 
-			<petclinic:inputField required="required" label="From"
-				name="appliesFrom"></petclinic:inputField>
+			<ppinot:inputField required="required" label="From"
+				name="appliesFrom"></ppinot:inputField>
 				
 				<div class="form-group has-feedback">
 			<div class="${cssGroup}">
@@ -34,8 +34,8 @@
 			</div>
 		</div>
 
-			<petclinic:inputField required="required" type="text" label="To"
-				name="appliesTo"></petclinic:inputField>
+			<ppinot:inputField required="required" type="text" label="To"
+				name="appliesTo"></ppinot:inputField>
 					
 				<div class="form-group has-feedback">
 			<div class="${cssGroup}">
@@ -103,4 +103,4 @@
 	</form:form>
 
 
-</petclinic:layout>
+</ppinot:layout>

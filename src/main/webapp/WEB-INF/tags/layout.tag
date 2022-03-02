@@ -1,5 +1,5 @@
 <%@ tag trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ attribute name="pageName" required="true" %>
@@ -7,10 +7,10 @@
 
 <!doctype html>
 <html>
-<petclinic:htmlHeader/>
+<ppinot:htmlHeader/>
 
 <body>
-<petclinic:bodyHeader menuName="${pageName}"/>
+<ppinot:bodyHeader menuName="${pageName}"/>
 
 <div class="container-fluid">
     <div class="container xd-container">

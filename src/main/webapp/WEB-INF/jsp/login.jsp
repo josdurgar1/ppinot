@@ -1,9 +1,9 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<petclinic:layout pageName="login">
+<ppinot:layout pageName="login">
 
     <div class="text-center">
                   <form class="form-signin" action="/login" method="post">
@@ -40,4 +40,4 @@
             </form>
          </div>
 
-</petclinic:layout>
+</ppinot:layout>

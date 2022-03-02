@@ -10,6 +10,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.ppinot.domain.CountMeasureForm;
+import org.springframework.samples.ppinot.domain.DataMeasureForm;
+import org.springframework.samples.ppinot.domain.DurationMeasureForm;
 import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.MeasureRedefined;
 import org.springframework.samples.ppinot.domain.Metric;
@@ -23,9 +25,13 @@ import es.us.isa.ppinot.evaluation.evaluators.LogMeasureEvaluator;
 import es.us.isa.ppinot.evaluation.evaluators.MeasureEvaluator;
 import es.us.isa.ppinot.evaluation.logs.LogProvider;
 import es.us.isa.ppinot.evaluation.logs.MXMLLog;
+import es.us.isa.ppinot.model.DataContentSelection;
 import es.us.isa.ppinot.model.MeasureDefinition;
 import es.us.isa.ppinot.model.base.CountMeasure;
+import es.us.isa.ppinot.model.base.DataMeasure;
+import es.us.isa.ppinot.model.base.DurationMeasure;
 import es.us.isa.ppinot.model.base.TimeMeasure;
+import es.us.isa.ppinot.model.condition.Condition;
 import es.us.isa.ppinot.model.condition.TimeInstantCondition;
 import es.us.isa.ppinot.model.scope.Period;
 import es.us.isa.ppinot.model.scope.SimpleTimeFilter;
@@ -139,6 +145,80 @@ public class MetricService {
 		metricRepository.save(result);
 
 	}
+	
+	
+	public void addDataMeasure(String logId, DataMeasureForm dataMeasureForm) throws Exception {
+		Metric result = new Metric();
+		DataMeasure dataMeasure = new DataMeasure();
+		dataMeasure.setName(dataMeasureForm.getName());
+		dataMeasure.setDescription(dataMeasureForm.getDescription());
+		dataMeasure.setScale(dataMeasureForm.getScale());
+		dataMeasure.setUnitOfMeasure(dataMeasureForm.getUnitOfMeasure());
+		dataMeasure.setFirst(dataMeasureForm.getFirst());
+		Condition precondition =new TimeInstantCondition(dataMeasureForm.getPrecondition(),state(dataMeasureForm.getWhen()));
+		dataMeasure.setPrecondition(precondition);
+		DataContentSelection dataContentSelection=new DataContentSelection(dataMeasureForm.getSelection(),"");
+		dataMeasure.setDataContentSelection(dataContentSelection);
+		List<Measure> measures = compute(dataMeasure, logId);
+		result.setName(dataMeasure.getName());
+		Date date = new Date();
+		result.setCreationDate(date);
+		result.setLogId(logId);
+		result.setDescription(dataMeasure.getDescription());
+//		result.setWhen(countMeasure.getWhen());
+		result.setScale(dataMeasure.getScale());
+		result.setUnitOfMeasure(dataMeasure.getUnitOfMeasure());
+		result.setTypeMeasure(dataMeasure.getClass().toString().substring(34));
+		List<MeasureRedefined> mR = new ArrayList<MeasureRedefined>();
+		for (Measure m : measures) {
+			MeasureRedefined r = new MeasureRedefined();
+			r.setEvidences(m.getEvidences());
+			r.setMeasureScopeRedefined(m.getMeasureScope());
+			r.setValue(r.getValue());
+			mR.add(r);
+		}
+		result.setMeasure(mR);
+		metricRepository.save(result);
+	}
+	
+	
+	public void addDurationMeasure(String logId, @Valid DurationMeasureForm durationMeasureForm) throws Exception {
+
+		Metric result = new Metric();
+		DurationMeasure durationMeasure = new DurationMeasure();
+		durationMeasure.setName(durationMeasureForm.getName());
+		durationMeasure.setDescription(durationMeasureForm.getDescription());
+		durationMeasure.setScale(durationMeasureForm.getScale());
+		durationMeasure.setUnitOfMeasure(durationMeasureForm.getUnitOfMeasure());
+		durationMeasure.setTimeMeasureType(durationMeasureForm.getTimeMeasureType());
+		durationMeasure.setFrom(new TimeInstantCondition(durationMeasureForm.getAppliesFrom(), durationMeasureForm.getFrom()));
+		durationMeasure.setTo(new TimeInstantCondition(durationMeasureForm.getAppliesTo(), durationMeasureForm.getTo()));
+		durationMeasure.setSingleInstanceAggFunction(durationMeasureForm.getSingleInstanceAggFunction());
+		List<Measure> measures = compute(durationMeasure, logId);
+//		log.getAssignedMetrics().add(result);
+		result.setName(durationMeasure.getName());
+		Date date = new Date();
+		result.setCreationDate(date);
+		result.setLogId(logId);
+		result.setDescription(durationMeasure.getDescription());
+//		result.setFrom(timeMeasure.getFrom());
+//		result.setTo(timeMeasure.getTo());
+		result.setScale(durationMeasure.getScale());
+		result.setTimeMeasureType(durationMeasure.getTimeMeasureType());
+		result.setUnitOfMeasure(durationMeasure.getUnitOfMeasure());
+		result.setTypeMeasure(durationMeasure.getClass().toString().substring(34));
+		List<MeasureRedefined> mR = new ArrayList<MeasureRedefined>();
+		for (Measure m : measures) {
+			MeasureRedefined r = new MeasureRedefined();
+			r.setEvidences(m.getEvidences());
+			r.setMeasureScopeRedefined(m.getMeasureScope());
+			r.setValue(r.getValue());
+			mR.add(r);
+		}
+		result.setMeasure(mR);
+		metricRepository.save(result);
+	}
+	
 	
 	
 	private RuntimeState state(WhenState text) {
