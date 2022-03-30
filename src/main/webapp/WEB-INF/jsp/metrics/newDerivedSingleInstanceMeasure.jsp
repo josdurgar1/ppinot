@@ -7,11 +7,11 @@
 <%@ taglib prefix="ppinot" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
 
-<ppinot:layout pageName="newDataMeasure">
+<ppinot:layout pageName="newDerivedSingleInstanceMeasure">
 
-	<h1>New DataMeasure</h1>
+	<h1>New DerivedSingleInstanceMeasure</h1>
 
-	<form:form modelAttribute="dataMeasure" class="form-horizontal"
+	<form:form modelAttribute="derivedSingleInstanceMeasure" class="form-horizontal"
 		id="add-archive-form" enctype="multipart/form-data">
 		<div class="form-group has-feedback">
 			<ppinot:inputField required="required" label="Name" name="name"></ppinot:inputField>
@@ -45,37 +45,9 @@
 				</div>
 			</div>
 		</div>
-		<ppinot:inputField required="required" label="When"
-			name="precondition"></ppinot:inputField>
-
-		<div class="form-group has-feedback">
-			<div class="${cssGroup}">
-				<label class="col-sm-2 control-label">GenericState </label>
-				<div class="col-sm-10">
-					<select id="when" name="when" required="required">
-						<jstl:forEach items="${when}" var="item">
-							<option value="${item}"><jstl:out value="${item }"></jstl:out></option>
-						</jstl:forEach>
-					</select>
-				</div>
-			</div>
-		</div>
-
-<div class="form-group has-feedback">
-			<div class="${cssGroup}">
-				<label class="col-sm-2 control-label">First? </label>
-				<div class="col-sm-10">
-					<select id="first" name="first" required="required">
-							<option value="True"><jstl:out value="True"></jstl:out></option>
-							<option value="False"><jstl:out value="False"></jstl:out></option>
-					</select>
-				</div>
-			</div>
-		</div>
-
-		<ppinot:inputField required="required" type="text" label="Selection"
-			name="selection"></ppinot:inputField>
-
+		
+		<ppinot:inputField required="required" type="text" label="Function"
+			name="function"></ppinot:inputField>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">

@@ -7,6 +7,7 @@
               description="Label appears in red color if input is considered as invalid after submission" %>
 <%@ attribute name="type" required="false"%>
 <%@ attribute name="required" required="false"%>
+<%@ attribute name="style" required="false" %>
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>

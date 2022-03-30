@@ -43,6 +43,7 @@ public class Metric  implements Serializable{/**
 	private String scale;
 	private String unitOfMeasure;
 	private String typeMeasure;
+	private String singleInstanceAggFunction;
 	
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")

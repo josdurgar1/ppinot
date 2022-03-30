@@ -1,7 +1,9 @@
-package org.springframework.samples.ppinot.domain;
+package org.springframework.samples.ppinot.form;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import es.us.isa.ppinot.model.state.GenericState;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,10 +32,10 @@ public class DataMeasureForm {
 	@NotNull
 	private String precondition;
 	@NotNull
-	private WhenState when;
-	@NotNull
+	private GenericState when;
+	@NotBlank
 	private String selection;
-//	@NotNull
+//	@NotBlank
 //	private String dataObjectId;
 	
 	

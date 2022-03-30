@@ -14,20 +14,27 @@
 	</h2>
 
 	<a href='<c:out value="${log.downloadUri }"></c:out>'>Download Log</a>
-
-	<jstl:if test="${metrics.size()>0 }">
+	<jstl:if test="${successMessage!=null }">
 	<div class="success">
-		<c:out value="${successMessage }"></c:out>
+			<c:out value="${successMessage }"></c:out>
+		</div>
+		</jstl:if>
+	<jstl:if test="${errorMessage!=null }">
+	<div class="error">
+		<c:out value="${errorMessage }"></c:out>
 	</div>
-	<h3>Associated Metrics</h3>
+	</jstl:if>
+	<jstl:if test="${metrics.size()>0 }">
+		
+
+		<h3>Associated Metrics</h3>
 		<table id="metricsTable" class="table table-striped">
 			<thead>
 				<tr>
-			     	<th style="width: 200px;">Type Measure</th>
+					<th style="width: 200px;">Type Measure</th>
 					<th style="width: 200px;">Name</th>
 					<th style="width: 200px;">Description</th>
 					<th style="width: 200px;">Date</th>
-					<th style="width: 200px;">Time Measure Type</th>
 					<th style="width: 200px;">Measures</th>
 					<th style="width: 200px;">Scale</th>
 					<th style="width: 200px;">Unit Of Measure</th>
@@ -38,11 +45,10 @@
 
 				<jstl:forEach items="${metrics}" var="metric">
 					<tr>
-					    <td><c:out value="${metric.typeMeasure}" /></td>
+						<td><c:out value="${metric.typeMeasure}" /></td>
 						<td><c:out value="${metric.name}" /></td>
 						<td><c:out value="${metric.description}" /></td>
 						<td><c:out value="${metric.creationDate}" /></td>
-						<td><c:out value="${metric.timeMeasureType}" /></td>
 						<td><c:out value="${metric.measure.size()}" /></td>
 						<td><c:out value="${metric.scale}" /></td>
 						<td><c:out value="${metric.unitOfMeasure}" /></td>

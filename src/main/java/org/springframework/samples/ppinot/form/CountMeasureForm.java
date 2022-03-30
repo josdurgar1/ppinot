@@ -1,7 +1,8 @@
-package org.springframework.samples.ppinot.domain;
+package org.springframework.samples.ppinot.form;
 
 import javax.validation.constraints.NotNull;
 
+import es.us.isa.ppinot.model.state.GenericState;
 import lombok.Data;
 
 @Data
@@ -27,6 +28,6 @@ public class CountMeasureForm {
 	// Momento en que se aplica la medida
 	private String appliesWhen;
 	@NotNull
-	private WhenState when;
+	private GenericState when;
 
 }

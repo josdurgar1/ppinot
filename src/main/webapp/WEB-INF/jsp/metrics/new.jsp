@@ -45,6 +45,20 @@
 					</spring:url> <a href="${fn:escapeXml(newDurationMeasureUrl)}">DurationMeasure</a>
 				</td>
 			</tr> -->
+			
+			<tr>
+				<td><spring:url value="newAggregatedMeasure?logId={logId}"
+						var="newAggregatedMeasureUrl">
+						<spring:param name="logId" value="${logId}" />
+					</spring:url> <a href="${fn:escapeXml(newAggregatedMeasureUrl)}">AggregatedMeasure</a></td>
+			</tr>
+			
+			<tr>
+				<td><spring:url value="newDerivedSingleInstanceMeasure?logId={logId}"
+						var="newDerivedSingleInstanceMeasureUrl">
+						<spring:param name="logId" value="${logId}" />
+					</spring:url> <a href="${fn:escapeXml(newDerivedSingleInstanceMeasureUrl)}">DerivedSingleInstanceMeasure</a></td>
+			</tr>
 		</tbody>
 	</table>
 

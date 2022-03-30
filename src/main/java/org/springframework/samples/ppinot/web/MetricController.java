@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.ppinot.domain.CountMeasureForm;
-import org.springframework.samples.ppinot.domain.DataMeasureForm;
-import org.springframework.samples.ppinot.domain.DurationMeasureForm;
 import org.springframework.samples.ppinot.domain.Log;
 import org.springframework.samples.ppinot.domain.Scale;
-import org.springframework.samples.ppinot.domain.TimeMeasureForm;
 import org.springframework.samples.ppinot.domain.UnitOfMeasure;
 import org.springframework.samples.ppinot.domain.WhenState;
+import org.springframework.samples.ppinot.form.CountMeasureForm;
+import org.springframework.samples.ppinot.form.DataMeasureForm;
+import org.springframework.samples.ppinot.form.DerivedSingleInstanceMeasureForm;
+import org.springframework.samples.ppinot.form.DurationMeasureForm;
+import org.springframework.samples.ppinot.form.TimeMeasureForm;
 import org.springframework.samples.ppinot.service.LogService;
 import org.springframework.samples.ppinot.service.MetricService;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.us.isa.ppinot.model.DataContentSelection;
 import es.us.isa.ppinot.model.condition.TimeMeasureType;
 import es.us.isa.ppinot.model.state.BPMNState;
 import es.us.isa.ppinot.model.state.ComplexState;
@@ -46,7 +48,46 @@ public class MetricController {
 		modelAndView.setViewName("/metrics/new");
 		return modelAndView;
 	}
-	
+
+	@RequestMapping(value = "/newDerivedSingleInstanceMeasure", method = RequestMethod.GET)
+	public ModelAndView newDerivedSingleInstanceMeasure(@RequestParam String logId) {
+		Log log = logService.findById(logId);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("log", log);
+		DerivedSingleInstanceMeasureForm derivedSingleInstanceMeasure = new DerivedSingleInstanceMeasureForm();
+		modelAndView.addObject("derivedSingleInstanceMeasure", derivedSingleInstanceMeasure);
+		modelAndView.addObject("scale_", Scale.values());
+		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+		modelAndView.setViewName("/metrics/newDerivedSingleInstanceMeasure");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/newDerivedSingleInstanceMeasure", method = RequestMethod.POST)
+	public ModelAndView newDerivedSingleInstanceMeasure(@RequestParam String logId,
+			DerivedSingleInstanceMeasureForm derivedSingleInstanceMeasure, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("/metrics/newDerivedSingleInstanceMeasure");
+			modelAndView.addObject("scale_", Scale.values());
+			modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
+		} else {
+			try {
+				metricService.addDerivedSingleInstanceMeasure(logId, derivedSingleInstanceMeasure);
+				modelAndView = logController.logDetails(logId);
+				modelAndView.addObject("successMessage", "New DerivedSingleInstanceMeasure has been add successfully");
+			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+				e.printStackTrace();
+				modelAndView =logController.logDetails(logId);
+				modelAndView.addObject("errorMessage", "The new derived single instance measure was not added");
+			}
+			
+
+		}
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/newDataMeasure", method = RequestMethod.GET)
 	public ModelAndView newDataMeasure(@RequestParam String logId) {
 		Log log = logService.findById(logId);
@@ -56,7 +97,7 @@ public class MetricController {
 		modelAndView.addObject("dataMeasure", dataMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-		modelAndView.addObject("when", WhenState.values());
+		modelAndView.addObject("when", GenericState.values());
 		modelAndView.setViewName("/metrics/newDataMeasure");
 		return modelAndView;
 	}
@@ -84,20 +125,6 @@ public class MetricController {
 		}
 		return modelAndView;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping(value = "/newCountMeasure", method = RequestMethod.GET)
 	public ModelAndView newCountMeasure(@RequestParam String logId) {
@@ -108,7 +135,7 @@ public class MetricController {
 		modelAndView.addObject("countMeasure", countMeasure);
 		modelAndView.addObject("scale_", Scale.values());
 		modelAndView.addObject("unitOfMeasure_", UnitOfMeasure.values());
-		modelAndView.addObject("when", WhenState.values());
+		modelAndView.addObject("when", GenericState.values());
 		modelAndView.setViewName("/metrics/newCountMeasure");
 		return modelAndView;
 	}
@@ -186,12 +213,7 @@ public class MetricController {
 		return modelAndView;
 
 	}
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping(value = "/newDurationMeasure", method = RequestMethod.GET)
 	public ModelAndView newDurationMeasure(@RequestParam String logId) {
 		Log log = logService.findById(logId);
@@ -241,5 +263,5 @@ public class MetricController {
 		return modelAndView;
 
 	}
-	
+
 }

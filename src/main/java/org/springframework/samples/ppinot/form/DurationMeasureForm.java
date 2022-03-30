@@ -1,4 +1,4 @@
-package org.springframework.samples.ppinot.domain;
+package org.springframework.samples.ppinot.form;
 
 import javax.validation.constraints.NotNull;
 
@@ -7,10 +7,7 @@ import es.us.isa.ppinot.model.state.GenericState;
 import lombok.Data;
 
 @Data
-public class TimeMeasureForm{
-	public TimeMeasureForm() {
-		super();
-	}
+public class DurationMeasureForm {
 
 	// Nombre de la medida
 	@NotNull
@@ -39,5 +36,7 @@ public class TimeMeasureForm{
 	// Tipo de la medida (ciclica o lineal)
 	@NotNull
 	private TimeMeasureType timeMeasureType;
+	@NotNull
+	private String singleInstanceAggFunction;
 
 }
