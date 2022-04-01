@@ -59,7 +59,7 @@ public class TimeMeasureService {
 			MeasureRedefined r = new MeasureRedefined();
 			r.setEvidences(m.getEvidences());
 			r.setMeasureScopeRedefined(m.getMeasureScope());
-			r.setValue(r.getValue());
+			r.setValue(m.getValue());
 			mR.add(r);
 		}
 		result.setMeasure(mR);
